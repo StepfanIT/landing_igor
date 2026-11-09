@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@import "@landing/ui/styles.css";
+
+/* класи зі спільних компонентів */
+@source "../../../shared/src";
+
+/* Бренд JCB — жовтий з макета Figma */
+@theme {
+  --color-brand: #fbb503;
+  --color-brand-deep: #d99a00;
+  --color-on-brand: #131313;
+}

@@ -1,0 +1,17 @@
+{
+  "name": "landing-igor",
+  "private": true,
+  "workspaces": [
+    "shared",
+    "bobcat",
+    "jcb"
+  ],
+  "scripts": {
+    "dev:bobcat": "npm run dev -w bobcat",
+    "dev:jcb": "npm run dev -w jcb",
+    "build:bobcat": "npm run build -w bobcat",
+    "build:jcb": "npm run build -w jcb",
+    "build": "npm run build -w bobcat && npm run build -w jcb",
+    "typecheck": "npm run typecheck -w bobcat && npm run typecheck -w jcb"
+  }
+}

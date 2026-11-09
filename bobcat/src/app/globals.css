@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@import "@landing/ui/styles.css";
+
+/* класи зі спільних компонентів */
+@source "../../../shared/src";
+
+/* Бренд Bobcat — помаранчевий (дзеркальна версія макета) */
+@theme {
+  --color-brand: #f26a1b;
+  --color-brand-deep: #d2550c;
+  --color-on-brand: #131313;
+}

@@ -1,0 +1,83 @@
+# Збирає обидва лендінги як статичні сайти і публікує на GitHub Pages:
+#   https://<owner>.github.io/<repo>/bobcat/
+#   https://<owner>.github.io/<repo>/jcb/
+# Заявки: задайте змінну репозиторію LEAD_ENDPOINT (Settings → Secrets and variables → Actions → Variables),
+# щоб форма надсилала дані на зовнішній сервіс (на GitHub Pages немає сервера).
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      STATIC_EXPORT: "1"
+      NEXT_TELEMETRY_DISABLED: "1"
+      NEXT_PUBLIC_LEAD_ENDPOINT: ${{ vars.LEAD_ENDPOINT }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci || npm install --no-audit --no-fund
+
+      - name: Resolve Pages URL
+        run: |
+          owner="${GITHUB_REPOSITORY_OWNER,,}"
+          repo="${GITHUB_REPOSITORY#*/}"
+          echo "REPO_NAME=$repo" >> "$GITHUB_ENV"
+          echo "PAGES_URL=https://$owner.github.io/$repo" >> "$GITHUB_ENV"
+
+      - name: Build Bobcat
+        working-directory: bobcat
+        run: |
+          NEXT_PUBLIC_BASE_PATH="/$REPO_NAME/bobcat" \
+          NEXT_PUBLIC_SITE_URL="$PAGES_URL/bobcat" \
+          NEXT_PUBLIC_PARTNER_URL="$PAGES_URL/jcb/" \
+          npx next build
+
+      - name: Build JCB
+        working-directory: jcb
+        run: |
+          NEXT_PUBLIC_BASE_PATH="/$REPO_NAME/jcb" \
+          NEXT_PUBLIC_SITE_URL="$PAGES_URL/jcb" \
+          NEXT_PUBLIC_PARTNER_URL="$PAGES_URL/bobcat/" \
+          npx next build
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp -r bobcat/out _site/bobcat
+          cp -r jcb/out _site/jcb
+          cp pages/index.html _site/index.html
+          touch _site/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
