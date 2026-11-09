@@ -55,8 +55,9 @@ export function buildJsonLd(c: SiteConfig) {
   const url = c.seo.siteUrl.replace(/\/$/, "");
   const orgId = `${url}/#organization`;
 
-  const offer = (name: string, kind: string, deal: "sale" | "rent", image?: string) => ({
+  const offer = (name: string, kind: string, deal: "sale" | "rent", image?: string, price?: number, currency?: string) => ({
     "@type": "Offer",
+    ...(price && deal === "sale" ? { price, priceCurrency: currency ?? "EUR" } : {}),
     businessFunction:
       deal === "sale" ? "http://purl.org/goodrelations/v1#Sell" : "http://purl.org/goodrelations/v1#LeaseOut",
     availability: "https://schema.org/InStock",
@@ -97,11 +98,12 @@ export function buildJsonLd(c: SiteConfig) {
     areaServed: { "@type": "Country", name: "Україна" },
     brand: { "@type": "Brand", name: c.brand.name },
     sameAs: [c.company.telegram, c.company.whatsapp].filter(Boolean),
+    hasMap: `https://www.google.com/maps?q=${encodeURIComponent(c.company.mapQuery ?? `${c.company.geo.lat},${c.company.geo.lng}`)}`,
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: `Техніка ${c.brand.name}: продаж та оренда`,
       itemListElement: c.catalog.products.flatMap((p) =>
-        p.deals.map((d) => offer(p.name, KIND_LABELS[p.kind], d, p.image)),
+        p.deals.map((d) => offer(p.name, KIND_LABELS[p.kind], d, p.image, p.price, p.currency)),
       ),
     },
   };

@@ -1,4 +1,5 @@
-import type { DealType, SiteConfig } from "@landing/ui";
+import type { SiteConfig } from "@landing/ui";
+import { products } from "./data/products";
 
 /**
  * ВЕСЬ контент сайту JCB — тут. Структура та тексти — за макетом Figma.
@@ -11,33 +12,33 @@ import type { DealType, SiteConfig } from "@landing/ui";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://jcb.example.com.ua";
 const PARTNER_URL = process.env.NEXT_PUBLIC_PARTNER_URL ?? "https://bobcat.example.com.ua";
 
-const SALE_RENT: DealType[] = ["sale", "rent"];
 
 export const site: SiteConfig = {
   id: "jcb",
   brand: { name: "JCB" },
   company: {
-    name: "Технокет",
+    name: "ТехноКет",
     legalName: "ТОВ «Технокет»",
     phone: "+380 (50) 999-59-39",
-    email: "info@example.com.ua",
-    telegram: "https://t.me/example",
+    email: "mironov_oleg@ukr.net",
+    telegram: "https://t.me/+380509995939",
     whatsapp: "https://wa.me/380509995939",
-    address: "вул. Промислова, 1",
-    city: "Київ",
-    region: "Київська область",
-    postalCode: "02000",
-    geo: { lat: 50.4501, lng: 30.5234 },
-    workHours: "Пн–Пт 9:00–18:00, Сб 10:00–15:00",
-    openingHours: ["Mo-Fr 09:00-18:00", "Sa 10:00-15:00"],
+    address: "вул. Рівненська, 146",
+    city: "Луцьк",
+    region: "Волинська область",
+    postalCode: "43000",
+    geo: { lat: 50.7451, lng: 25.3949 },
+    mapQuery: "Спецтехніка ТехноКет, вулиця Рівненська, 146, Луцьк",
+    // графік і контакти — з магазину клієнта на Prom; TODO: ЄДРПОУ
+    workHours: "Пн–Пт 10:00–18:00",
+    openingHours: ["Mo-Fr 10:00-18:00"],
     foundingYear: 2016,
-    edrpou: "00000000",
   },
   seo: {
     siteUrl: SITE_URL,
-    title: "Продаж та оренда спецтехніки JCB в Україні | Технокет",
+    title: "Телескопічні навантажувачі JCB — продаж у Луцьку | ТехноКет",
     description:
-      "Продаж та оренда техніки JCB: екскаватори-навантажувачі 3CX і 4CX, телескопічні навантажувачі, навантажувачі та підйомники. Сервіс, розрахунок з ПДВ, доставка по Україні.",
+      "Телескопічні навантажувачі JCB в наявності: 525-60, 531-70, 535-95, 540-140 Hi Viz, 550-80 Agri. Ціни, фото, перевірений стан. Луцьк, вул. Рівненська, 146 — доставка по Україні.",
     keywords: [
       "jcb",
       "джсб",
@@ -69,13 +70,13 @@ export const site: SiteConfig = {
     foreground: "21.3% 59.6%, 30% 59.6%, 30% 73.6%, 21.95% 73.6%",
     art: "excavator",
     stats: [
-      { icon: "machines", value: "40+", label: "одиниць техніки в наявності" },
+      { icon: "machines", value: "35+", label: "одиниць техніки в наявності" },
       { icon: "delivery", value: "24 год", label: "доставка техніки клієнтам" },
     ],
     highlight: { value: "99.9%", label: "відсоток задоволених клієнтів" },
     accent: "Продаж",
     title: "спецтехніки",
-    srTitle: "JCB в Україні: продаж та оренда екскаваторів-навантажувачів і телескопічних навантажувачів",
+    srTitle: "JCB у Луцьку: телескопічні навантажувачі в наявності з доставкою по Україні",
     benefits: [
       { text: "Сервіс та обслуговування" },
       { text: "Розрахунок з ПДВ" },
@@ -88,7 +89,7 @@ export const site: SiteConfig = {
     sinceSuffix: "року",
     image: "/images/about.webp",
     paragraphs: [
-      "Технокет — команда, що з 2016 року постачає будівельним, дорожнім, комунальним та аграрним компаніям надійну техніку JCB.",
+      "ТехноКет — компанія з Луцька, що з 2016 року постачає аграріям, будівельникам і складським комплексам перевірену техніку JCB.",
       "Підбираємо машину під об'єкт і бюджет, оформлюємо купівлю, лізинг чи оренду, доставляємо техніку на місце та супроводжуємо сервісом протягом усього терміну роботи.",
     ],
     points: ["Продаж нової та вживаної техніки", "Оренда з оператором і без", "Сервіс і оригінальні запчастини", "Лізинг і розрахунок з ПДВ"],
@@ -109,16 +110,9 @@ export const site: SiteConfig = {
   },
   catalog: {
     title: "Топ продаж",
-    note: "* Натисніть на картку, щоб отримати ціну та умови купівлі або оренди. Наявність уточнюйте в менеджера.",
+    note: "* Ціни вказані в євро. Натисніть на картку, щоб отримати консультацію, фото та відео техніки. Наявність уточнюйте в менеджера.",
     // порядок: на десктопі картки йдуть стовпчиками (1-й стовпчик: 1 і 2 картка, 2-й: 3 і 4 …)
-    products: [
-      { id: "3cx", name: "JCB 3CX", kind: "backhoe", image: "/images/products/3cx.webp", deals: SALE_RENT },
-      { id: "4cx", name: "JCB 4CX", kind: "backhoe", image: "/images/products/4cx.webp", deals: SALE_RENT },
-      { id: "540-140", name: "JCB 540-140", kind: "telehandler", image: "/images/products/540-140.webp", deals: SALE_RENT },
-      { id: "531-70", name: "JCB 531-70", kind: "telehandler", image: "/images/products/531-70.webp", deals: SALE_RENT },
-      { id: "forklift", name: "Вилковий навантажувач", kind: "forklift", image: "/images/products/forklift.webp", deals: SALE_RENT },
-      { id: "scissor", name: "Ножичний підйомник", kind: "scissor-lift", image: "/images/products/scissor-lift.webp", deals: SALE_RENT },
-    ],
+    products,
   },
   rental: {
     title: "Оренда",
@@ -130,12 +124,9 @@ export const site: SiteConfig = {
   attachments: {
     title: "Навісне",
     items: [
-      { id: "bucket", name: "Ковш", kind: "bucket", image: "/images/attachments/bucket.webp", text: "Копання, навантаження ґрунту та сипучих матеріалів." },
-      { id: "forks", name: "Палетні вила", kind: "forks", image: "/images/attachments/forks.webp", text: "Робота з піддонами та будматеріалами." },
-      { id: "breaker", name: "Гідромолот", kind: "breaker", image: "/images/attachments/breaker.webp", text: "Демонтаж бетону, асфальту, скельних порід." },
-      { id: "auger", name: "Гідробур", kind: "auger", image: "/images/attachments/auger.webp", text: "Буріння під палі, стовпи та опори." },
-      { id: "grapple", name: "Ковш-грейфер", kind: "grapple", image: "/images/attachments/grapple.webp", text: "Габаритні матеріали, будівельне сміття, ліс." },
-      { id: "broom", name: "Щітка", kind: "broom", image: "/images/attachments/broom.webp", text: "Прибирання доріг, майданчиків і снігу." },
+      { id: "bucket-large", name: "Ковш великого об'єму", kind: "bucket", image: "/images/attachments/bucket-large.webp", text: "Зерно, добрива, сипучі матеріали — швидке навантаження великими об'ємами." },
+      { id: "forks", name: "Палетні вила", kind: "forks", image: "/images/attachments/forks.webp", text: "Піддони, будматеріали та штучні вантажі на висоту до 14 м." },
+      { id: "bucket-boom", name: "Ковш на стрілі", kind: "bucket", image: "/images/attachments/bucket-boom.webp", text: "Навантаження у високі причепи та бункери завдяки телескопічній стрілі." },
     ],
   },
   order: {
@@ -159,9 +150,9 @@ export const site: SiteConfig = {
     name: "Bobcat",
     url: PARTNER_URL,
     label: "Реклама",
-    title: "Компактна техніка для будь-якого майданчика",
-    text: "Потрібна маневрена техніка? Міні-навантажувачі, міні-екскаватори та телескопічні навантажувачі Bobcat — продаж і оренда на нашому сайті Bobcat.",
-    models: ["Bobcat S650", "Bobcat T590", "Bobcat E27z", "Bobcat TL35.70"],
+    title: "Міні-навантажувачі Bobcat у наявності",
+    text: "Потрібна маневрена техніка? Колісні та гусеничні міні-навантажувачі Bobcat, зокрема High Flow, — фото, ціни та характеристики на нашому сайті Bobcat.",
+    models: ["Bobcat S770", "Bobcat T770", "Bobcat S650", "Bobcat T650"],
     cta: "Перейти на сайт Bobcat",
     image: "/images/partner-bobcat.webp",
     art: "skid-steer",

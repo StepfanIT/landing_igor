@@ -51,9 +51,11 @@ export function Footer({ c }: { c: SiteConfig }) {
                   WhatsApp <WhatsApp className="size-[15px] text-white" />
                 </a>
               )}
-              <a href={co.telegram} target="_blank" rel="noopener" className="flex items-center gap-5 p-2.5 transition hover:text-brand">
-                Telegram <Telegram className="size-[15px] text-white" />
-              </a>
+              {co.telegram && (
+                <a href={co.telegram} target="_blank" rel="noopener" className="flex items-center gap-5 p-2.5 transition hover:text-brand">
+                  Telegram <Telegram className="size-[15px] text-white" />
+                </a>
+              )}
             </nav>
             <LeadButton prefill={{ type: "consult" }} className={buttonClass("brand", "lg", "w-full whitespace-nowrap sm:w-auto sm:min-w-[264px]")}>
               Замовити дзвінок
@@ -67,9 +69,9 @@ export function Footer({ c }: { c: SiteConfig }) {
             Icon={AddressIcon}
             label="Наш офіс знаходиться за адресою:"
             value={`${co.city}, ${co.address}`}
-            href={`https://www.google.com/maps/dir/?api=1&destination=${co.geo.lat},${co.geo.lng}`}
+            href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(co.mapQuery ?? `${co.geo.lat},${co.geo.lng}`)}`}
           />
-          <Contact Icon={Mail} label="Пишіть нам на пошту:" value={co.email} href={`mailto:${co.email}`} />
+          {co.email && <Contact Icon={Mail} label="Пишіть нам на пошту:" value={co.email} href={`mailto:${co.email}`} />}
         </address>
 
         <div className="mt-10 flex flex-col gap-3 border-t border-white/15 pt-10 font-display text-base text-white/60 lg:mt-[40px] lg:flex-row lg:items-start lg:justify-between">

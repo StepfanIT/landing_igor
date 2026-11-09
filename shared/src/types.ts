@@ -12,7 +12,7 @@ export type MachineKind =
   | "forklift"
   | "scissor-lift";
 
-export type AttachmentKind = "bucket" | "forks" | "auger" | "breaker" | "broom" | "grapple";
+export type AttachmentKind = "bucket" | "forks" | "auger" | "breaker" | "broom" | "grapple" | "blade" | "mower" | "snowblower";
 
 export type DealType = "sale" | "rent";
 
@@ -38,6 +38,11 @@ export interface Product {
   /** Текст ціни. Поки цін немає — "Ціна за запитом". */
   priceSale?: string;
   priceRent?: string;
+  /** Числова ціна для schema.org (Offer.price) */
+  price?: number;
+  currency?: "EUR" | "USD" | "UAH";
+  /** Сторінка товару в магазині клієнта (Prom) */
+  sourceUrl?: string;
 }
 
 export interface Attachment {
@@ -77,14 +82,16 @@ export interface SiteConfig {
     name: string;
     legalName: string;
     phone: string;
-    email: string;
-    telegram: string;
+    email?: string;
+    telegram?: string;
     whatsapp?: string;
     address: string;
     city: string;
     region: string;
     postalCode: string;
     geo: { lat: number; lng: number };
+    /** Пошуковий запит для Google Maps (назва + адреса) — показує саме мітку компанії */
+    mapQuery?: string;
     workHours: string;
     /** Для schema.org, напр. ["Mo-Fr 09:00-18:00", "Sa 10:00-15:00"] */
     openingHours: string[];

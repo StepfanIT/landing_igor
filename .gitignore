@@ -10,3 +10,6 @@ next-env.d.ts
 .DS_Store
 _site
 .wrangler
+.feed-cache
+.venv-feed
+__pycache__

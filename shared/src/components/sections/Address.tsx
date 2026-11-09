@@ -4,7 +4,8 @@ import { GiantTitle } from "../ui";
 /** "НАША АДРЕСА:" + карта на всю ширину контейнера */
 export function Address({ c }: { c: SiteConfig }) {
   const co = c.company;
-  const mapSrc = `https://www.google.com/maps?q=${co.geo.lat},${co.geo.lng}&z=16&hl=uk&output=embed`;
+  const q = encodeURIComponent(co.mapQuery ?? `${co.geo.lat},${co.geo.lng}`);
+  const mapSrc = `https://www.google.com/maps?q=${q}&z=16&hl=uk&output=embed`;
   return (
     <section id="contacts" aria-labelledby="contacts-title" className="bg-page pt-14 lg:pt-[100px]">
       <div className="container-site">

@@ -244,7 +244,7 @@ export function MachineArt({ kind, className, mirror }: { kind: MachineKind; cla
   );
 }
 
-const attachments: Record<AttachmentKind, () => ReactNode> = {
+const attachments: Record<Exclude<AttachmentKind, "blade" | "mower" | "snowblower">, () => ReactNode> = {
   bucket: () => (
     <>
       <path d="M22 38 L178 38 L168 108 L32 108 Z" fill={STEEL} />
@@ -306,10 +306,13 @@ const attachments: Record<AttachmentKind, () => ReactNode> = {
   ),
 };
 
+// для видів без власної ілюстрації — найближча за формою
+const ART_ALIASES: Partial<Record<AttachmentKind, AttachmentKind>> = { blade: "bucket", mower: "broom", snowblower: "broom" };
+
 export function AttachmentArt({ kind, className }: { kind: AttachmentKind; className?: string }) {
   return (
     <svg viewBox="0 0 200 140" className={className} role="presentation" aria-hidden="true">
-      {attachments[kind]()}
+      {attachments[(ART_ALIASES[kind] ?? kind) as keyof typeof attachments]()}
     </svg>
   );
 }
