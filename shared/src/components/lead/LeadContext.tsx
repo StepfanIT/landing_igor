@@ -27,6 +27,7 @@ export function useLead() {
 
 export function LeadProvider({ children, data }: { children: ReactNode; data: LeadData }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const [prefill, setPrefill] = useState<LeadPrefill | undefined>();
   const [isOpen, setIsOpen] = useState(false);
   const [formKey, setFormKey] = useState(0);
@@ -42,7 +43,10 @@ export function LeadProvider({ children, data }: { children: ReactNode; data: Le
   useEffect(() => {
     const d = dialogRef.current;
     if (!d) return;
-    if (isOpen && !d.open) d.showModal();
+    if (isOpen && !d.open) {
+      d.showModal();
+      titleRef.current?.focus();
+    }
     if (!isOpen && d.open) d.close();
     document.documentElement.style.overflow = isOpen ? "hidden" : "";
   }, [isOpen]);
@@ -71,7 +75,8 @@ export function LeadProvider({ children, data }: { children: ReactNode; data: Le
           >
             <X className="size-6" />
           </button>
-          <h2 id="lead-modal-title" className="text-center font-display text-h4 font-semibold uppercase">
+          {/* фокус на заголовку: при відкритті не стрибає на хрестик і не відкриває клавіатуру на телефоні */}
+          <h2 id="lead-modal-title" ref={titleRef} tabIndex={-1} className="px-8 text-center font-display text-h4 font-semibold uppercase outline-none">
             {prefill?.model ? prefill.model : "On-line заявка"}
           </h2>
           <p className="mt-2 text-center text-sm text-white/60">Передзвонимо, підберемо техніку під ваші задачі та розрахуємо вартість.</p>

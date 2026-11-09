@@ -27,8 +27,11 @@ export function formatPhone(input: string) {
 /* поле як у макеті: прозоре, лише нижня лінія */
 const field =
   "w-full border-0 border-b border-white/15 bg-transparent px-0 py-5 text-base text-white placeholder:text-white/60 outline-none transition focus:border-brand";
-const selectCls = cx(field, "appearance-none bg-[length:16px] bg-[right_0_center] bg-no-repeat pr-8 [&_option]:bg-page [&_option]:text-white");
+const selectCls = cx(field, "appearance-none pr-8 [&_option]:bg-page [&_option]:text-white");
 const chevron = {
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "right 0 center",
+  backgroundSize: "16px",
   backgroundImage:
     "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff99' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")",
 };

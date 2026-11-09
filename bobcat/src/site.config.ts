@@ -67,8 +67,6 @@ export const site: SiteConfig = {
   sections: { rental: false, faq: false },
   hero: {
     image: "/images/hero.webp",
-    // ківш екскаватора перекриває кінець плашки "ПРОДАЖ" (як у макеті)
-    foreground: "21.3% 59.6%, 30% 59.6%, 30% 73.6%, 21.95% 73.6%",
     art: "skid-steer",
     stats: [
       { icon: "machines", value: "35+", label: "одиниць техніки в наявності" },

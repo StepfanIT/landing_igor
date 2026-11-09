@@ -45,25 +45,25 @@ export function CardSlider({
   return (
     <div>
       <div className="flex items-center justify-between gap-6">
-        <GiantTitle id={titleId}>{title}</GiantTitle>
-        <div className="flex shrink-0 items-center gap-[clamp(0.5rem,2.1vw,40px)]">
+        <GiantTitle id={titleId} className="min-w-0">{title}</GiantTitle>
+        <div className="flex shrink-0 items-center gap-1 sm:gap-[clamp(0.5rem,2.1vw,40px)]">
           <button
             type="button"
             onClick={() => scroll(-1)}
             disabled={!canPrev}
             aria-label={`Попередні — ${title}`}
-            className="size-[clamp(2.75rem,3.1vw,60px)] text-white transition hover:text-brand disabled:opacity-30 disabled:hover:text-white"
+            className="size-10 text-white transition hover:text-brand disabled:opacity-30 disabled:hover:text-white sm:size-[clamp(2.75rem,3.1vw,60px)]"
           >
-            <ArrowLeftThin className="size-full scale-[1.4]" />
+            <ArrowLeftThin className="size-full sm:scale-[1.4]" />
           </button>
           <button
             type="button"
             onClick={() => scroll(1)}
             disabled={!canNext}
             aria-label={`Наступні — ${title}`}
-            className="size-[clamp(2.75rem,3.1vw,60px)] text-white transition hover:text-brand disabled:opacity-30 disabled:hover:text-white"
+            className="size-10 text-white transition hover:text-brand disabled:opacity-30 disabled:hover:text-white sm:size-[clamp(2.75rem,3.1vw,60px)]"
           >
-            <ArrowRightThin className="size-full scale-[1.4]" />
+            <ArrowRightThin className="size-full sm:scale-[1.4]" />
           </button>
         </div>
       </div>

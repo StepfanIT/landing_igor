@@ -28,6 +28,7 @@ export function StickyHeader({ brand, logo, phone, nav }: { brand: string; logo?
   const visible = show || menu;
 
   return (
+    <>
     <header
       className={cx(
         "fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-page/95 backdrop-blur transition-transform duration-300",
@@ -72,10 +73,13 @@ export function StickyHeader({ brand, logo, phone, nav }: { brand: string; logo?
         </div>
       </div>
 
+    </header>
+
+    {/* панель меню — поза <header>: у шапки є transform, через який fixed-елементи всередині рахуються від неї, а не від екрана */}
       <div
         id="mobile-menu"
         className={cx(
-          "fixed inset-x-0 bottom-0 top-16 overflow-y-auto bg-page transition-opacity duration-300 lg:hidden",
+          "fixed inset-x-0 bottom-0 top-16 z-[49] overflow-y-auto bg-page transition-opacity duration-300 lg:hidden",
           menu ? "visible opacity-100" : "invisible opacity-0",
         )}
       >
@@ -94,11 +98,13 @@ export function StickyHeader({ brand, logo, phone, nav }: { brand: string; logo?
             <a href={telHref(phone)} className={buttonClass("outline", "lg", "w-full")}>
               {phone}
             </a>
-            <LeadButton className={buttonClass("brand", "lg", "w-full")}>Залишити заявку</LeadButton>
+            <div onClickCapture={() => setMenu(false)}>
+              <LeadButton className={buttonClass("brand", "lg", "w-full")}>Залишити заявку</LeadButton>
+            </div>
           </div>
         </nav>
       </div>
-    </header>
+    </>
   );
 }
 

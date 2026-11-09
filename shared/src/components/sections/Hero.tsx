@@ -107,7 +107,7 @@ export function Benefits({ c }: { c: SiteConfig }) {
           <li key={b.text} className="relative flex min-h-[clamp(4rem,5.7vw,109px)] items-center gap-[clamp(0.75rem,1vw,20px)] overflow-hidden py-2 lg:pl-[6px]">
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute left-[60%] top-1/2 -translate-y-[45%] select-none font-display text-[clamp(4rem,9.6vw,185px)] font-semibold leading-none text-white/[0.09]"
+              className="pointer-events-none absolute right-0 top-1/2 sm:right-auto sm:left-[60%] -translate-y-[45%] select-none font-display text-[clamp(4rem,9.6vw,185px)] font-semibold leading-none text-white/[0.09]"
             >
               {String(i + 1).padStart(2, "0")}
             </span>
