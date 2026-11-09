@@ -1,15 +1,17 @@
 import type { ComponentType, SVGProps } from "react";
 import type { Feature, FeatureIconName, SiteConfig } from "../../types";
-import { Helmet, Money, Worker } from "../FigmaIcons";
+import { Helmet, Worker } from "../FigmaIcons";
 import { Icon } from "../Icon";
 import { LeadButton } from "../lead/LeadContext";
 import { MachineMedia, cx } from "../ui";
 
-const FIGMA_ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = { helmet: Helmet, money: Money, worker: Worker };
+// іконка "money" з макета містила знак ₽ — замість неї нейтральні монети
+const FIGMA_ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = { helmet: Helmet, worker: Worker };
 
 function FeatureIcon({ name }: { name: FeatureIconName }) {
   const Figma = FIGMA_ICONS[name];
   if (Figma) return <Figma className="h-1/2 w-1/2" />;
+  if (name === "money") return <Icon name="coins" className="h-[46%] w-[46%]" />;
   return <Icon name={name as Exclude<FeatureIconName, "helmet" | "money" | "worker">} className="h-[44%] w-[44%]" />;
 }
 
