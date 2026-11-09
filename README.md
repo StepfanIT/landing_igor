@@ -1,5 +1,9 @@
 # Лендінги Bobcat + JCB (продаж та оренда спецтехніки)
 
+**Живі версії (GitHub Pages):**
+- Bobcat — https://stepfanit.github.io/landing_igor/bobcat/
+- JCB — https://stepfanit.github.io/landing_igor/jcb/
+
 Монорепо з двома сайтами на **Next.js 16 + React 19 + Tailwind CSS 4 + TypeScript**.
 Верстка, секції, форма та SEO спільні (`shared/`). Кожен сайт має свій контент і кольори.
 
@@ -95,7 +99,7 @@ URL сервісу, що приймає POST JSON (наприклад, Cloudflar
 Локальна перевірка статичної збірки (Git Bash):
 
 ```bash
-cd jcb && MSYS_NO_PATHCONV=1 STATIC_EXPORT=1 NEXT_PUBLIC_BASE_PATH=/landing-igor/jcb npx next build   # → jcb/out
+cd jcb && MSYS_NO_PATHCONV=1 STATIC_EXPORT=1 NEXT_PUBLIC_BASE_PATH=/landing_igor/jcb npx next build   # → jcb/out
 ```
 
 ## Деплой (Vercel)
