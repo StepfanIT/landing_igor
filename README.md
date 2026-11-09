@@ -92,9 +92,19 @@ Workflow `.github/workflows/deploy-pages.yml` при кожному пуші в 
 - `https://<owner>.github.io/<repo>/jcb/`
 
 На GitHub Pages немає сервера, тож API-роут заявок (`src/app/api/lead/route.server.ts`) у статичну збірку не потрапляє.
-Щоб форма надсилала заявки, вкажіть змінну репозиторію `LEAD_ENDPOINT` (Settings → Secrets and variables → Actions → Variables) —
-URL сервісу, що приймає POST JSON (наприклад, Cloudflare Worker з пересиланням у Telegram або Formspree).
-Без неї форма показує «Онлайн-заявки ще не підключені» і номер телефону.
+Заявки приймає **Cloudflare Worker** `workers/lead` → пересилає в Telegram. Його адреса задається змінною репозиторію
+`LEAD_ENDPOINT` (Settings → Secrets and variables → Actions → Variables), і форма шле дані туди.
+
+```bash
+cd workers/lead
+npx wrangler login                              # один раз
+npx wrangler secret put TELEGRAM_BOT_TOKEN      # токен від @BotFather
+npx wrangler secret put TELEGRAM_CHAT_ID        # chat_id (кілька — через кому)
+npx wrangler deploy                             # → https://technoket-lead.<акаунт>.workers.dev
+```
+
+Worker приймає запити лише з сайтів у `ALLOWED_ORIGINS` (`wrangler.toml`). Додасте власний домен — допишіть його туди.
+Токен бота зберігається тільки в секретах Cloudflare і в код сайту не потрапляє.
 
 Локальна перевірка статичної збірки (Git Bash):
 

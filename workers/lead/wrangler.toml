@@ -1,0 +1,11 @@
+# Cloudflare Worker для заявок з лендінгів → Telegram.
+# Деплой:  npx wrangler deploy            (з папки workers/lead)
+# Секрети: npx wrangler secret put TELEGRAM_BOT_TOKEN
+#          npx wrangler secret put TELEGRAM_CHAT_ID    (кілька чатів — через кому)
+name = "technoket-lead"
+main = "src/index.ts"
+compatibility_date = "2025-11-01"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGINS = "https://stepfanit.github.io,http://localhost:3001,http://localhost:3002,http://localhost:8080"
