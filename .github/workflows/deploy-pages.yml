@@ -65,13 +65,6 @@ jobs:
           mkdir -p _site
           cp -r bobcat/out _site/bobcat
           cp -r jcb/out _site/jcb
-          # GitHub Pages віддає файл без розширення як octet-stream — месенджери не показують прев'ю.
-          # Перейменовуємо OG-картинку на .png і оновлюємо посилання на неї.
-          for s in bobcat jcb; do
-            mv "_site/$s/opengraph-image" "_site/$s/opengraph-image.png"
-            find "_site/$s" -maxdepth 1 -type f \( -name '*.html' -o -name '*.txt' \) \
-              -exec sed -i -E 's#/opengraph-image(\?[a-z0-9]+)?#/opengraph-image.png#g' {} +
-          done
           cp pages/index.html _site/index.html
           touch _site/.nojekyll
 

@@ -4,7 +4,8 @@ import { KIND_LABELS } from "../labels";
 import type { SiteConfig } from "../types";
 
 export function buildMetadata(c: SiteConfig): Metadata {
-  const url = c.seo.siteUrl;
+  const url = c.seo.siteUrl.replace(/\/$/, "");
+  const ogImage = { url: `${url}/og.png`, width: 1200, height: 630, alt: c.seo.ogTitle };
   return {
     metadataBase: new URL(url),
     title: c.seo.title,
@@ -14,7 +15,7 @@ export function buildMetadata(c: SiteConfig): Metadata {
     authors: [{ name: c.company.legalName }],
     creator: c.company.legalName,
     publisher: c.company.legalName,
-    alternates: { canonical: url },
+    alternates: { canonical: `${url}/` },
     formatDetection: { telephone: true, email: true, address: true },
     openGraph: {
       type: "website",
@@ -23,11 +24,13 @@ export function buildMetadata(c: SiteConfig): Metadata {
       siteName: `${c.brand.name} — ${c.company.name}`,
       title: c.seo.ogTitle,
       description: c.seo.description,
+      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title: c.seo.ogTitle,
       description: c.seo.description,
+      images: [ogImage.url],
     },
     robots: {
       index: true,
@@ -77,7 +80,7 @@ export function buildJsonLd(c: SiteConfig) {
     url,
     telephone: c.company.phone,
     email: c.company.email,
-    image: `${url}/opengraph-image`,
+    image: `${url}/og.png`,
     logo: `${url}/icon.svg`,
     foundingDate: String(c.company.foundingYear),
     priceRange: "$$$",
