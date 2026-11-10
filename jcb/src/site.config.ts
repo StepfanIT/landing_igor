@@ -151,6 +151,7 @@ export const site: SiteConfig = {
     image: "/images/partner-lineup.webp",
     art: "skid-steer",
     products: bobcatProducts,
+    ctaColor: { bg: "#e31b23", fg: "#ffffff" },
   },
   faq: {
     title: "Питання",

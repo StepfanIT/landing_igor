@@ -98,7 +98,7 @@ export const site: SiteConfig = {
   featured: {
     kicker: "Гаряча пропозиція",
     model: "Bobcat S76 High Flow",
-    image: "/images/products/featured-s76.webp",
+    image: "/images/products/featured-hot.webp",
     art: "skid-steer",
     features: [
       { icon: "money", title: "Акційна ціна", text: "89 900 € — спеціальна ціна, поки машина в наявності" },
@@ -150,6 +150,7 @@ export const site: SiteConfig = {
     image: "/images/partner-jcb.webp",
     art: "telehandler",
     products: jcbProducts,
+    ctaColor: { bg: "#ffc72c", fg: "#131313" },
   },
   faq: {
     title: "Питання",

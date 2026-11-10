@@ -192,6 +192,8 @@ export interface SiteConfig {
     image?: string;
     art: MachineKind;
     colors?: { bg: string; fg: string; accent: string; accentFg: string };
+    /** Колір кнопки "Переглянути весь асортимент" — бренд сайту-партнера, щоб кнопка виділялась */
+    ctaColor?: { bg: string; fg: string };
     /** Техніка з сайту-партнера для слайдера "Техніка <партнер>" */
     products?: Product[];
   };
