@@ -101,7 +101,7 @@ export function buildJsonLd(c: SiteConfig) {
     hasMap: `https://www.google.com/maps?q=${encodeURIComponent(c.company.mapQuery ?? `${c.company.geo.lat},${c.company.geo.lng}`)}`,
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: `Техніка ${c.brand.name}: продаж та оренда`,
+      name: `Техніка ${c.brand.name}: продаж`,
       itemListElement: c.catalog.products.flatMap((p) =>
         p.deals.map((d) => offer(p.name, KIND_LABELS[p.kind], d, p.image, p.price, p.currency)),
       ),
