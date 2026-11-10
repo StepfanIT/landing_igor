@@ -20,7 +20,7 @@ export function resolveImages(config: SiteConfig): SiteConfig {
     ...config,
     brand: { ...config.brand, logo: existingImage(config.brand.logo) },
     hero: { ...config.hero, image: existingImage(config.hero.image) },
-    about: { ...config.about, image: existingImage(config.about.image) },
+    about: { ...config.about, image: existingImage(config.about.image), logo: existingImage(config.about.logo) },
     featured: { ...config.featured, image: existingImage(config.featured.image) },
     bigStat: { ...config.bigStat, image: existingImage(config.bigStat.image) },
     partner: { ...config.partner, image: existingImage(config.partner.image) },

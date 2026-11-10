@@ -5,5 +5,5 @@ import { site } from "@/site.config";
 export const dynamic = "force-static";
 
 export function GET() {
-  return renderOgImage(site, { brand: "#fbb503", onBrand: "#131313" });
+  return renderOgImage(site, { brand: "#ffc72c", onBrand: "#131313" });
 }

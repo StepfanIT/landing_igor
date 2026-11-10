@@ -1,6 +1,6 @@
 "use client";
 
-import { Children, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { Children, useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { ArrowLeftThin, ArrowRightThin } from "./FigmaIcons";
 import { GiantTitle, cx } from "./ui";
 
@@ -78,8 +78,14 @@ export function CardSlider({
           rows === 2 && count > 3 && "lg:grid-rows-2",
         )}
       >
-        {Children.map(children, (child) => (
-          <div className="snap-start">{child}</div>
+        {Children.map(children, (child, i) => (
+          <div
+            className="snap-start"
+            data-reveal
+            style={{ "--reveal-delay": `${Math.min(i, 5) * 80}ms` } as CSSProperties}
+          >
+            {child}
+          </div>
         ))}
       </div>
     </div>

@@ -68,38 +68,6 @@ export const products: Product[] = [
     "sourceUrl": "https://050-999-59-39.online/p3095744910-teleskopicheskij-pogruzchik-jcb.html"
   },
   {
-    "id": "3095744914",
-    "name": "JCB 535-95 Agri",
-    "kind": "telehandler",
-    "image": "/images/products/jcb-535-95-agri-3095744914.webp",
-    "deals": [
-      "sale"
-    ],
-    "badge": "2017",
-    "price": 67000,
-    "currency": "EUR",
-    "priceSale": "67 000 €",
-    "specs": [
-      {
-        "label": "Вантажопідйомність",
-        "value": "3,5 т"
-      },
-      {
-        "label": "Висота підйому",
-        "value": "9,5 м"
-      },
-      {
-        "label": "Напрацювання",
-        "value": "3 460 мотогод"
-      },
-      {
-        "label": "Потужність",
-        "value": "110 к.с."
-      }
-    ],
-    "sourceUrl": "https://050-999-59-39.online/p3095744914-teleskopicheskij-pogruzchik-agri.html"
-  },
-  {
     "id": "3095744924",
     "name": "JCB 535-95 Agri",
     "kind": "telehandler",
@@ -352,34 +320,6 @@ export const products: Product[] = [
     "sourceUrl": "https://050-999-59-39.online/p3109598544-teleskopicheskij-pogruzchik-jcb.html"
   },
   {
-    "id": "3109598547",
-    "name": "JCB 535-95",
-    "kind": "telehandler",
-    "image": "/images/products/jcb-535-95-3109598547.webp",
-    "deals": [
-      "sale"
-    ],
-    "badge": "2015",
-    "price": 58000,
-    "currency": "EUR",
-    "priceSale": "58 000 €",
-    "specs": [
-      {
-        "label": "Вантажопідйомність",
-        "value": "3,5 т"
-      },
-      {
-        "label": "Напрацювання",
-        "value": "3 118 мотогод"
-      },
-      {
-        "label": "Потужність",
-        "value": "110 к.с."
-      }
-    ],
-    "sourceUrl": "https://050-999-59-39.online/p3109598547-teleskopicheskij-pogruzchik-jcb.html"
-  },
-  {
     "id": "3095744922",
     "name": "JCB 535-95",
     "kind": "telehandler",
@@ -438,34 +378,6 @@ export const products: Product[] = [
       }
     ],
     "sourceUrl": "https://050-999-59-39.online/p3095744909-teleskopicheskij-pogruzchik-jcb.html"
-  },
-  {
-    "id": "3109598535",
-    "name": "JCB 535-125",
-    "kind": "telehandler",
-    "image": "/images/products/jcb-535-125-3109598535.webp",
-    "deals": [
-      "sale"
-    ],
-    "badge": "2014",
-    "price": 49900,
-    "currency": "EUR",
-    "priceSale": "49 900 €",
-    "specs": [
-      {
-        "label": "Вантажопідйомність",
-        "value": "3,5 т"
-      },
-      {
-        "label": "Висота підйому",
-        "value": "12 м"
-      },
-      {
-        "label": "Напрацювання",
-        "value": "2 240 мотогод"
-      }
-    ],
-    "sourceUrl": "https://050-999-59-39.online/p3109598535-teleskopicheskij-pogruzchik-jcb.html"
   },
   {
     "id": "3109598537",
@@ -586,90 +498,6 @@ export const products: Product[] = [
       }
     ],
     "sourceUrl": "https://050-999-59-39.online/p3095744927-teleskopicheskij-pogruzchik-jcb.html"
-  },
-  {
-    "id": "3109598549",
-    "name": "JCB 531-70 Agri Plus",
-    "kind": "telehandler",
-    "image": "/images/products/jcb-531-70-agri-plus-3109598549.webp",
-    "deals": [
-      "sale"
-    ],
-    "badge": "2011",
-    "price": 48000,
-    "currency": "EUR",
-    "priceSale": "48 000 €",
-    "specs": [
-      {
-        "label": "Вантажопідйомність",
-        "value": "3,1 т"
-      },
-      {
-        "label": "Напрацювання",
-        "value": "6 500 мотогод"
-      },
-      {
-        "label": "Потужність",
-        "value": "130 к.с."
-      }
-    ],
-    "sourceUrl": "https://050-999-59-39.online/p3109598549-teleskopicheskij-pogruzchik-jcb.html"
-  },
-  {
-    "id": "3095744911",
-    "name": "JCB 541-70 Agri Super",
-    "kind": "telehandler",
-    "image": "/images/products/jcb-541-70-agri-super-3095744911.webp",
-    "deals": [
-      "sale"
-    ],
-    "badge": "2008",
-    "price": 47000,
-    "currency": "EUR",
-    "priceSale": "47 000 €",
-    "specs": [
-      {
-        "label": "Вантажопідйомність",
-        "value": "4,1 т"
-      },
-      {
-        "label": "Висота підйому",
-        "value": "7 м"
-      },
-      {
-        "label": "Напрацювання",
-        "value": "8 200 мотогод"
-      }
-    ],
-    "sourceUrl": "https://050-999-59-39.online/p3095744911-teleskopicheskij-pogruzchik-jcb.html"
-  },
-  {
-    "id": "3109598539",
-    "name": "JCB 541-70 Agri Super",
-    "kind": "telehandler",
-    "image": "/images/products/jcb-541-70-agri-super-3109598539.webp",
-    "deals": [
-      "sale"
-    ],
-    "badge": "2008",
-    "price": 47000,
-    "currency": "EUR",
-    "priceSale": "47 000 €",
-    "specs": [
-      {
-        "label": "Вантажопідйомність",
-        "value": "4,1 т"
-      },
-      {
-        "label": "Напрацювання",
-        "value": "8 200 мотогод"
-      },
-      {
-        "label": "Потужність",
-        "value": "130 к.с."
-      }
-    ],
-    "sourceUrl": "https://050-999-59-39.online/p3109598539-teleskopicheskij-pogruzchik-jcb.html"
   },
   {
     "id": "3109598548",

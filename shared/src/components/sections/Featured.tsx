@@ -1,4 +1,4 @@
-import type { ComponentType, SVGProps } from "react";
+import type { CSSProperties, ComponentType, SVGProps } from "react";
 import type { Feature, FeatureIconName, SiteConfig } from "../../types";
 import { Helmet, Worker } from "../FigmaIcons";
 import { Icon } from "../Icon";
@@ -15,9 +15,9 @@ function FeatureIcon({ name }: { name: FeatureIconName }) {
   return <Icon name={name as Exclude<FeatureIconName, "helmet" | "money" | "worker">} className="h-[44%] w-[44%]" />;
 }
 
-function FeatureItem({ f, side }: { f: Feature; side: "left" | "right" }) {
+function FeatureItem({ f, side, i }: { f: Feature; side: "left" | "right"; i: number }) {
   return (
-    <li className={cx("flex items-center gap-[clamp(1rem,2.1vw,40px)]", side === "left" && "lg:flex-row-reverse lg:text-right")}>
+    <li data-reveal={side} style={{ "--reveal-delay": `${150 + i * 130}ms` } as CSSProperties} className={cx("flex items-center gap-[clamp(1rem,2.1vw,40px)]", side === "left" && "lg:flex-row-reverse lg:text-right")}>
       <span className="grid size-[clamp(4rem,5.2vw,100px)] shrink-0 place-items-center rounded-full bg-brand text-graphite">
         <FeatureIcon name={f.icon} />
       </span>
@@ -39,7 +39,7 @@ export function Featured({ c }: { c: SiteConfig }) {
   return (
     <section id="featured" aria-labelledby="featured-title" className="overflow-hidden bg-white pb-16 pt-12 text-page lg:pb-[clamp(3rem,3.2vw,62px)] lg:pt-[clamp(3rem,3.3vw,64px)]">
       <div className="container-site">
-        <h2 id="featured-title" className="font-oswald text-model font-bold uppercase lg:pl-[9px]">
+        <h2 id="featured-title" data-reveal className="font-oswald text-model font-bold uppercase lg:pl-[9px]">
           {f.kicker}
           <br />
           <span className="text-brand">{brandWord}</span> {rest.join(" ")}
@@ -47,18 +47,18 @@ export function Featured({ c }: { c: SiteConfig }) {
 
         <div className="mt-10 grid items-center gap-10 lg:mt-[clamp(3rem,5.6vw,106px)] lg:grid-cols-[1fr_1.55fr_1fr] lg:gap-0">
           <ul className="order-2 grid gap-8 sm:grid-cols-2 lg:order-1 lg:grid-cols-1 lg:gap-[clamp(2rem,4.5vw,87px)] lg:pl-[35px]">
-            {left.map((x) => (
-              <FeatureItem key={x.title} f={x} side="left" />
+            {left.map((x, i) => (
+              <FeatureItem key={x.title} f={x} side="left" i={i} />
             ))}
           </ul>
-          <div className="order-1 lg:order-2 lg:-mx-[clamp(0rem,6vw,115px)]">
+          <div data-reveal="zoom" className="order-1 lg:order-2 lg:-mx-[clamp(0rem,6vw,115px)]">
             <LeadButton prefill={{ type: "sale", model: f.model }} aria-label={`${f.model} — дізнатися ціну`} className="block w-full cursor-pointer">
               <MachineMedia src={f.image} alt={f.model} kind={f.art} className="aspect-[1037/580]" sizes="(min-width: 1024px) 55vw, 95vw" />
             </LeadButton>
           </div>
           <ul className="order-3 grid gap-8 sm:grid-cols-2 lg:grid-cols-1 lg:gap-[clamp(2rem,4.5vw,87px)] lg:pr-[35px]">
-            {right.map((x) => (
-              <FeatureItem key={x.title} f={x} side="right" />
+            {right.map((x, i) => (
+              <FeatureItem key={x.title} f={x} side="right" i={i} />
             ))}
           </ul>
         </div>

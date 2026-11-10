@@ -9,6 +9,7 @@ import { LeadForm } from "./LeadForm";
 export interface LeadData {
   siteId: string;
   phone: string;
+  telegram?: string;
   products: { name: string; deals: DealType[] }[];
   attachments: string[];
 }

@@ -4,9 +4,9 @@
 /* класи зі спільних компонентів */
 @source "../../../shared/src";
 
-/* Бренд Bobcat — помаранчевий (дзеркальна версія макета) */
+/* Бренд Bobcat — червоний (дзеркальна версія макета) */
 @theme {
-  --color-brand: #f26a1b;
-  --color-brand-deep: #d2550c;
-  --color-on-brand: #131313;
+  --color-brand: #e31b23;
+  --color-brand-deep: #b5121a;
+  --color-on-brand: #ffffff;
 }

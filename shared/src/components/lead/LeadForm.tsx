@@ -1,9 +1,10 @@
 "use client";
 
 import { useId, useMemo, useRef, useState, type FormEvent } from "react";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { CheckCircle2, Loader2, Phone } from "lucide-react";
 import { withBase } from "../../base-path";
-import { LEAD_TYPES, RENT_PERIODS, type LeadPrefill, type LeadType } from "../../lead-types";
+import { LEAD_TYPES, type LeadPrefill, type LeadType } from "../../lead-types";
+import { Telegram } from "../FigmaIcons";
 import { buttonClass, cx, telHref } from "../ui";
 import { useLead } from "./LeadContext";
 
@@ -36,10 +37,37 @@ const chevron = {
     "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff99' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")",
 };
 
+/** Скільки моделей показувати у списку (решта — через "Інша модель") */
+const MAX_MODELS = 10;
+const OTHER_MODEL = "Інша модель";
+
 type Status = "idle" | "sending" | "ok" | "error";
 
 /** Куди надсилати заявку: власний API-роут (Vercel/сервер) або зовнішній сервіс для статичного хостингу (GitHub Pages) */
 const LEAD_ENDPOINT = process.env.NEXT_PUBLIC_LEAD_ENDPOINT || withBase("/api/lead");
+
+/** Кнопки під формою: "Зателефонувати" + Telegram — для тих, хто не хоче лишати номер */
+export function ContactButtons({ className }: { className?: string }) {
+  const { phone, telegram } = useLead();
+  return (
+    <div className={cx("grid gap-2", telegram ? "grid-cols-[1fr_auto]" : "grid-cols-1", className)}>
+      <a href={telHref(phone)} className={buttonClass("outline", "lg", "w-full !text-base sm:!text-[20px]")}>
+        <Phone className="size-5 text-brand" /> Зателефонувати
+      </a>
+      {telegram && (
+        <a
+          href={telegram}
+          target="_blank"
+          rel="noopener"
+          aria-label="Написати в Telegram"
+          className="grid size-[66px] place-items-center border border-white/25 text-white transition hover:border-brand hover:text-brand"
+        >
+          <Telegram className="size-6" />
+        </a>
+      )}
+    </div>
+  );
+}
 
 export function LeadForm({
   prefill,
@@ -53,25 +81,25 @@ export function LeadForm({
   variant?: "full" | "mini";
   submitLabel?: string;
 }) {
-  const { products, attachments, phone: companyPhone, siteId } = useLead();
+  const { products, attachments, phone: companyPhone } = useLead();
+  const { siteId } = useLead();
   const uid = useId();
   const startedAt = useRef(Date.now());
   const full = variant === "full";
 
-  const [type, setType] = useState<LeadType>(prefill?.type ?? (full ? "sale" : "consult"));
+  const initialType: LeadType = prefill?.type && prefill.type !== "rent" ? prefill.type : full ? "sale" : "consult";
+  const [type, setType] = useState<LeadType>(initialType);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [model, setModel] = useState(prefill?.model ?? "");
-  const [period, setPeriod] = useState("");
   const [comment, setComment] = useState("");
   const [agree, setAgree] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
   const modelOptions = useMemo(() => {
-    if (type === "attachment") return attachments;
-    if (type === "service" || type === "consult") return products.map((p) => p.name);
-    return products.filter((p) => p.deals.includes(type)).map((p) => p.name);
+    const list = type === "attachment" ? attachments : products.map((p) => p.name);
+    return [...new Set(list)].slice(0, MAX_MODELS);
   }, [type, products, attachments]);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -98,7 +126,6 @@ export function LeadForm({
           name,
           phone,
           model,
-          period: type === "rent" ? period : "",
           comment,
           website: fd.get("website"),
           startedAt: startedAt.current,
@@ -197,35 +224,25 @@ export function LeadForm({
         className={field}
       />
 
-      {full && (
+      {full && (type === "sale" || type === "attachment") && (
         <>
           <label htmlFor={`${uid}-model`} className="sr-only">
             Модель
           </label>
           <select id={`${uid}-model`} name="model" value={model} onChange={(e) => setModel(e.target.value)} className={selectCls} style={chevron}>
-            <option value="">{type === "attachment" ? "Обладнання — потрібна консультація" : "Модель — потрібна консультація"}</option>
-            {model && !modelOptions.includes(model) && <option value={model}>{model}</option>}
+            <option value="">{type === "attachment" ? "Обладнання — оберіть зі списку" : "Модель — оберіть зі списку"}</option>
+            {model && model !== OTHER_MODEL && !modelOptions.includes(model) && <option value={model}>{model}</option>}
             {modelOptions.map((m) => (
               <option key={m} value={m}>
                 {m}
               </option>
             ))}
+            <option value={OTHER_MODEL}>{OTHER_MODEL}</option>
           </select>
-          {type === "rent" && (
-            <>
-              <label htmlFor={`${uid}-period`} className="sr-only">
-                Термін оренди
-              </label>
-              <select id={`${uid}-period`} name="period" value={period} onChange={(e) => setPeriod(e.target.value)} className={selectCls} style={chevron}>
-                <option value="">Термін оренди — ще не знаю</option>
-                {RENT_PERIODS.map((p) => (
-                  <option key={p} value={p}>
-                    {p}
-                  </option>
-                ))}
-              </select>
-            </>
-          )}
+        </>
+      )}
+      {full && (
+        <>
           <label htmlFor={`${uid}-comment`} className="sr-only">
             Коментар
           </label>
@@ -235,7 +252,7 @@ export function LeadForm({
             rows={2}
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            placeholder="Коментар: тип робіт, місто, терміни"
+            placeholder={model === OTHER_MODEL ? "Яка модель вас цікавить?" : "Коментар: тип робіт, місто, терміни"}
             className={cx(field, "resize-none")}
           />
         </>
@@ -276,10 +293,11 @@ export function LeadForm({
         </p>
       )}
 
-      <button type="submit" disabled={status === "sending"} className={buttonClass("brand", "lg", "mt-10 w-full")}>
+      <button type="submit" disabled={status === "sending"} className={buttonClass("brand", "lg", "mt-8 w-full")}>
         {status === "sending" && <Loader2 className="size-5 animate-spin" />}
         {status === "sending" ? "Надсилаємо…" : submitLabel}
       </button>
+      <ContactButtons className="mt-2" />
     </form>
   );
 }

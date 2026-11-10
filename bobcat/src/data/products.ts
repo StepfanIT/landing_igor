@@ -96,30 +96,6 @@ export const products: Product[] = [
     "sourceUrl": "https://050-999-59-39.online/p3109598533-gusenichnyj-mini-pogruzchik.html"
   },
   {
-    "id": "3113462929",
-    "name": "Bobcat S530",
-    "kind": "skid-steer",
-    "image": "/images/products/bobcat-s530-3113462929.webp",
-    "deals": [
-      "sale"
-    ],
-    "badge": "2015",
-    "price": 26900,
-    "currency": "EUR",
-    "priceSale": "26 900 €",
-    "specs": [
-      {
-        "label": "Напрацювання",
-        "value": "1 912 мотогод"
-      },
-      {
-        "label": "Вага",
-        "value": "2,8 т"
-      }
-    ],
-    "sourceUrl": "https://050-999-59-39.online/p3113462929-mini-pogruzchik-bobcat.html"
-  },
-  {
     "id": "3095744929",
     "name": "Bobcat S650 High Flow",
     "kind": "skid-steer",

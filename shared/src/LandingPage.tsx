@@ -1,4 +1,5 @@
 import { LeadProvider } from "./components/lead/LeadContext";
+import { RevealObserver } from "./components/Motion";
 import { About } from "./components/sections/About";
 import { Address } from "./components/sections/Address";
 import { BigStat } from "./components/sections/BigStat";
@@ -8,7 +9,7 @@ import { Featured } from "./components/sections/Featured";
 import { Footer } from "./components/sections/Footer";
 import { Benefits, Hero } from "./components/sections/Hero";
 import { Order } from "./components/sections/Order";
-import { PartnerPromo } from "./components/sections/PartnerPromo";
+import { PartnerCatalog } from "./components/sections/PartnerCatalog";
 import { Rental } from "./components/sections/Rental";
 import { MobileBar, StickyHeader } from "./components/sections/StickyHeader";
 import { resolveImages } from "./server/images";
@@ -25,6 +26,7 @@ export function LandingPage({ config }: { config: SiteConfig }) {
       data={{
         siteId: c.id,
         phone: c.company.phone,
+        telegram: c.company.telegram,
         products: c.catalog.products.map((p) => ({ name: p.name, deals: p.deals })),
         attachments: c.attachments.items.map((a) => a.name),
       }}
@@ -35,7 +37,7 @@ export function LandingPage({ config }: { config: SiteConfig }) {
       >
         Перейти до змісту
       </a>
-      <StickyHeader brand={c.brand.name} logo={c.brand.logo} phone={c.company.phone} nav={c.nav} />
+      <StickyHeader brand={c.brand.name} logo={c.brand.logo} phone={c.company.phone} telegram={c.company.telegram} nav={c.nav} />
       <main id="main">
         <Hero c={c} />
         <Benefits c={c} />
@@ -44,14 +46,15 @@ export function LandingPage({ config }: { config: SiteConfig }) {
         <Catalog title={c.catalog.title} note={c.catalog.note} products={c.catalog.products} />
         {c.sections?.rental && <Rental c={c} />}
         <Attachments title={c.attachments.title} items={c.attachments.items} />
+        <PartnerCatalog c={c} />
         <Order c={c} />
         <BigStat c={c} />
-        <PartnerPromo c={c} />
         {c.sections?.faq && <Faq c={c} />}
         <Address c={c} />
       </main>
       <Footer c={c} />
-      <MobileBar phone={c.company.phone} />
+      <MobileBar phone={c.company.phone} telegram={c.company.telegram} />
+      <RevealObserver />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}

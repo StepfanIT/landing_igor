@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import type { SiteConfig } from "../../types";
 import { Helmet } from "../FigmaIcons";
 import { Bullet, GiantTitle } from "../ui";
@@ -14,6 +15,7 @@ export function About({ c }: { c: SiteConfig }) {
           <GiantTitle id="about-title">{a.title}</GiantTitle>
           <div className="relative mt-2 flex items-start">
             <p
+              data-reveal="left"
               aria-label={`${a.sinceLabel} ${year} ${a.sinceSuffix}`}
               className="relative z-10 shrink-0 pl-[10px] font-display font-semibold uppercase leading-none"
             >
@@ -22,7 +24,7 @@ export function About({ c }: { c: SiteConfig }) {
               <span className="block text-[clamp(3.5rem,7.3vw,140px)] text-brand">{year.slice(2)}</span>
               <span className="mt-[0.15em] block text-[clamp(1.75rem,3.5vw,68px)]">{a.sinceSuffix}</span>
             </p>
-            <div className="relative -ml-[clamp(1rem,2.6vw,50px)] mt-[clamp(0.25rem,0.4vw,7px)] aspect-[630/419] w-full max-w-[630px] overflow-hidden bg-ink-800">
+            <div data-reveal="zoom" style={{ "--reveal-delay": "150ms" } as CSSProperties} className="relative -ml-[clamp(1rem,2.6vw,50px)] mt-[clamp(0.25rem,0.4vw,7px)] aspect-[630/419] w-full max-w-[630px] overflow-hidden bg-ink-800">
               {a.image ? (
                 <Image src={a.image} alt={`Команда ${c.company.name}`} fill sizes="(min-width: 1024px) 33vw, 80vw" className="object-cover" />
               ) : (
@@ -35,7 +37,11 @@ export function About({ c }: { c: SiteConfig }) {
           </div>
         </div>
 
-        <div className="reveal flex flex-col justify-end lg:pb-[45px]">
+        <div data-reveal="right" style={{ "--reveal-delay": "250ms" } as CSSProperties} className="flex flex-col justify-end lg:pb-[45px]">
+          {a.logo && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={a.logo} alt={`${c.company.name} — логотип`} width={2386} height={1646} loading="lazy" className="mb-8 h-auto w-[min(100%,340px)] lg:w-[min(100%,420px)]" />
+          )}
           <div className="space-y-5 font-display text-[clamp(1rem,1.04vw,20px)] leading-relaxed text-white/70">
             {a.paragraphs.map((p) => (
               <p key={p}>{p}</p>

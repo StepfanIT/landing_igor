@@ -85,6 +85,7 @@ export interface SiteConfig {
     email?: string;
     telegram?: string;
     whatsapp?: string;
+    tiktok?: string;
     address: string;
     city: string;
     region: string;
@@ -136,6 +137,8 @@ export interface SiteConfig {
     sinceLabel: string;
     sinceSuffix: string;
     image?: string;
+    /** Логотип компанії (кугуар на мапі України) у правій колонці */
+    logo?: string;
     paragraphs: string[];
     points: string[];
   };
@@ -168,7 +171,8 @@ export interface SiteConfig {
   order: {
     title: string;
     formTitle: string;
-    steps: { title: string; text: string }[];
+    /** Короткий текст під заголовком */
+    text: string;
   };
   bigStat: {
     value: string;
@@ -187,7 +191,9 @@ export interface SiteConfig {
     cta: string;
     image?: string;
     art: MachineKind;
-    colors: { bg: string; fg: string; accent: string; accentFg: string };
+    colors?: { bg: string; fg: string; accent: string; accentFg: string };
+    /** Техніка з сайту-партнера для слайдера "Техніка <партнер>" */
+    products?: Product[];
   };
   faq: {
     title: string;

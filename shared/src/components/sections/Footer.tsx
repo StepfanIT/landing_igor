@@ -1,5 +1,6 @@
 import type { ComponentType, SVGProps } from "react";
 import type { SiteConfig } from "../../types";
+import { CatMark } from "../CatMark";
 import { Address as AddressIcon, Mail, PhoneSquare, Telegram, WhatsApp } from "../FigmaIcons";
 import { LeadButton } from "../lead/LeadContext";
 import { buttonClass, telHref } from "../ui";
@@ -36,16 +37,21 @@ export function Footer({ c }: { c: SiteConfig }) {
       <div className="container-site">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
           <a href="#top" className="flex items-center gap-5" aria-label={`${c.brand.name} — на початок сторінки`}>
-            <span className="grid size-[75px] shrink-0 place-items-center rounded-full bg-white font-display text-xl font-semibold uppercase text-page">
-              {c.brand.name.length <= 3 ? c.brand.name : c.brand.name.charAt(0)}
-            </span>
-            <span className="text-center">
-              <span className="block font-display text-card font-semibold uppercase">{co.name}</span>
+            {c.about.logo ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={c.about.logo} alt={`${co.name} — логотип`} width={2386} height={1646} loading="lazy" className="h-auto w-[110px] shrink-0 transition duration-500 hover:scale-105" />
+            ) : (
+              <span className="grid size-[75px] shrink-0 place-items-center rounded-full bg-white text-page">
+                <CatMark className="size-[52px]" />
+              </span>
+            )}
+            <span>
+              <span className="block font-display text-card font-semibold uppercase">{co.legalName}</span>
               <span className="mt-[5px] block font-display text-base text-white/60">{c.footer.tagline}</span>
             </span>
           </a>
           <div className="flex flex-wrap items-center gap-x-10 gap-y-4">
-            <nav aria-label="Месенджери" className="flex items-center gap-5 font-display text-base text-white/60">
+            <nav aria-label="Месенджери" className="flex flex-wrap items-center gap-x-5 gap-y-1 font-display text-base text-white/60">
               {co.whatsapp && (
                 <a href={co.whatsapp} target="_blank" rel="noopener" className="flex items-center gap-5 p-2.5 transition hover:text-brand">
                   WhatsApp <WhatsApp className="size-[15px] text-white" />
@@ -56,10 +62,23 @@ export function Footer({ c }: { c: SiteConfig }) {
                   Telegram <Telegram className="size-[15px] text-white" />
                 </a>
               )}
+              {co.tiktok && (
+                <a href={co.tiktok} target="_blank" rel="noopener" className="flex items-center gap-5 p-2.5 transition hover:text-brand">
+                  TikTok
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-[15px] text-white">
+                    <path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.8 5.8 0 0 0-.8-.1 5.7 5.7 0 1 0 5.7 5.7V9a7.4 7.4 0 0 0 4.3 1.4V7.3a4.3 4.3 0 0 1-3.2-1.5Z" />
+                  </svg>
+                </a>
+              )}
             </nav>
-            <LeadButton prefill={{ type: "consult" }} className={buttonClass("brand", "lg", "w-full whitespace-nowrap sm:w-auto sm:min-w-[264px]")}>
-              Замовити дзвінок
-            </LeadButton>
+            <div className="grid w-full gap-2 sm:flex sm:w-auto">
+              <LeadButton prefill={{ type: "consult" }} className={buttonClass("brand", "lg", "w-full whitespace-nowrap sm:w-auto sm:min-w-[264px]")}>
+                Замовити дзвінок
+              </LeadButton>
+              <a href={telHref(co.phone)} className={buttonClass("outline", "lg", "w-full whitespace-nowrap sm:w-auto")}>
+                Зателефонувати
+              </a>
+            </div>
           </div>
         </div>
 

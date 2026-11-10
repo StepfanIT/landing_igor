@@ -97,7 +97,7 @@ export function buildJsonLd(c: SiteConfig) {
     openingHours: c.company.openingHours,
     areaServed: { "@type": "Country", name: "Україна" },
     brand: { "@type": "Brand", name: c.brand.name },
-    sameAs: [c.company.telegram, c.company.whatsapp].filter(Boolean),
+    sameAs: [c.company.telegram, c.company.whatsapp, c.company.tiktok].filter(Boolean),
     hasMap: `https://www.google.com/maps?q=${encodeURIComponent(c.company.mapQuery ?? `${c.company.geo.lat},${c.company.geo.lng}`)}`,
     hasOfferCatalog: {
       "@type": "OfferCatalog",

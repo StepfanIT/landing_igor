@@ -44,6 +44,11 @@
     scroll-padding-top: 5rem;
     -webkit-tap-highlight-color: transparent;
   }
+  html,
+  body {
+    /* анімації з виїздом збоку не повинні давати горизонтальну прокрутку */
+    overflow-x: clip;
+  }
   body {
     @apply bg-page font-sans text-white antialiased;
     text-rendering: optimizeLegibility;
@@ -169,24 +174,92 @@
   text-shadow: 0 4px 4px rgb(0 0 0 / 0.25);
 }
 
-/* Плавна поява секцій при скролі (тільки там, де браузер підтримує scroll-driven animations) */
-@keyframes reveal-up {
+/* ---------- Анімації ---------- */
+
+/*
+ * Поява при прокручуванні: елементам з data-reveal ("up" | "left" | "right" | "zoom")
+ * RevealObserver додає клас is-visible. Клас js-reveal на <html> вмикається лише після
+ * завантаження JS — без JS (і для пошуковиків) весь контент одразу видимий.
+ * Затримка для каскаду — CSS-змінна --reveal-delay.
+ */
+.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 36px, 0);
+  transition:
+    opacity 0.75s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.js-reveal [data-reveal="left"] {
+  transform: translate3d(-48px, 0, 0);
+}
+.js-reveal [data-reveal="right"] {
+  transform: translate3d(48px, 0, 0);
+}
+.js-reveal [data-reveal="zoom"] {
+  transform: scale(0.92);
+}
+.js-reveal [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Перший екран: послідовна поява при завантаженні */
+@keyframes hero-in {
   from {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translate3d(0, 28px, 0);
   }
   to {
     opacity: 1;
     transform: none;
   }
 }
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes label-wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes arrow-bob {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(6px, 6px);
+  }
+}
+@utility hero-in {
+  animation: hero-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+@utility hero-zoom {
+  animation: hero-zoom 2.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@utility label-wipe {
+  animation: label-wipe 0.8s cubic-bezier(0.7, 0, 0.2, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+@utility arrow-bob {
+  animation: arrow-bob 2.2s ease-in-out infinite;
+}
 
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .reveal {
-      animation: reveal-up linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 30%;
-    }
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

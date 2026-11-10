@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Menu, Phone, X } from "lucide-react";
 import type { NavItem } from "../../types";
+import { Telegram } from "../FigmaIcons";
 import { LeadButton } from "../lead/LeadContext";
 import { BrandMark, buttonClass, cx, telHref } from "../ui";
 
@@ -10,7 +11,7 @@ import { BrandMark, buttonClass, cx, telHref } from "../ui";
  * Компактна шапка, що з'являється після першого екрану (у макеті перший екран без меню —
  * тож навігація не змінює вигляд героя, але доступна при скролі). На мобільному — бургер-меню.
  */
-export function StickyHeader({ brand, logo, phone, nav }: { brand: string; logo?: string; phone: string; nav: NavItem[] }) {
+export function StickyHeader({ brand, logo, phone, telegram, nav }: { brand: string; logo?: string; phone: string; telegram?: string; nav: NavItem[] }) {
   const [show, setShow] = useState(false);
   const [menu, setMenu] = useState(false);
 
@@ -54,6 +55,11 @@ export function StickyHeader({ brand, logo, phone, nav }: { brand: string; logo?
           <a href={telHref(phone)} className="hidden font-display text-base font-semibold xl:block hover:text-brand">
             {phone}
           </a>
+          {telegram && (
+            <a href={telegram} target="_blank" rel="noopener" className="grid size-11 place-items-center border border-white/20 text-white transition hover:text-brand" aria-label="Написати в Telegram">
+              <Telegram className="size-5" />
+            </a>
+          )}
           <a href={telHref(phone)} className="grid size-11 place-items-center border border-white/20 text-brand xl:hidden" aria-label={`Подзвонити ${phone}`}>
             <Phone className="size-5" />
           </a>
@@ -109,7 +115,7 @@ export function StickyHeader({ brand, logo, phone, nav }: { brand: string; logo?
 }
 
 /** Липка нижня панель на мобільних: дзвінок + заявка */
-export function MobileBar({ phone }: { phone: string }) {
+export function MobileBar({ phone, telegram }: { phone: string; telegram?: string }) {
   const [show, setShow] = useState(false);
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.7);
@@ -125,11 +131,15 @@ export function MobileBar({ phone }: { phone: string }) {
         show ? "translate-y-0" : "translate-y-full",
       )}
     >
-      <div className="grid grid-cols-[auto_1fr] gap-2">
-        <a href={telHref(phone)} className={buttonClass("outline", "md", "px-4")} aria-label={`Подзвонити ${phone}`}>
-          <Phone className="size-5 text-brand" />
+      <div className={cx("grid gap-2", telegram ? "grid-cols-[auto_1fr]" : "grid-cols-1")}>
+        {telegram && (
+          <a href={telegram} target="_blank" rel="noopener" className={buttonClass("outline", "md", "px-4")} aria-label="Написати в Telegram">
+            <Telegram className="size-5 text-brand" />
+          </a>
+        )}
+        <a href={telHref(phone)} className={buttonClass("brand", "md", "w-full")}>
+          <Phone className="size-5" /> Зателефонувати
         </a>
-        <LeadButton className={buttonClass("brand", "md", "w-full")}>Залишити заявку</LeadButton>
       </div>
     </div>
   );

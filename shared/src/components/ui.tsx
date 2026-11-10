@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import type { AttachmentKind, MachineKind } from "../types";
+import { CatMark } from "./CatMark";
 import { AttachmentArt, MachineArt } from "./MachineArt";
 
 export function cx(...c: (string | false | null | undefined)[]) {
@@ -40,7 +41,7 @@ export function GiantTitle({
   as?: "h1" | "h2";
 }) {
   return (
-    <Tag id={id} className={cx("font-display text-giant font-semibold uppercase", className)}>
+    <Tag id={id} data-reveal className={cx("font-display text-giant font-semibold uppercase", className)}>
       {children}
     </Tag>
   );
@@ -92,7 +93,12 @@ export function AttachmentMedia({ src, alt, kind, className }: { src?: string; a
 /** Текстовий логотип бренду (поки немає файлу логотипа) */
 export function BrandMark({ name, logo, className }: { name: string; logo?: string; className?: string }) {
   if (logo) return <Image src={logo} alt={name} width={140} height={40} className={cx("h-9 w-auto", className)} />;
-  return <span className={cx("font-display text-2xl font-semibold uppercase leading-none tracking-tight", className)}>{name}</span>;
+  return (
+    <span className={cx("flex items-center gap-2.5", className)}>
+      <CatMark className="size-9 text-brand" />
+      <span className="font-display text-2xl font-semibold uppercase leading-none tracking-tight">{name}</span>
+    </span>
+  );
 }
 
 export function telHref(phone: string) {

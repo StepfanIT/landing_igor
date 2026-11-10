@@ -10,6 +10,7 @@ import { MachineArt } from "../MachineArt";
 export function PartnerPromo({ c }: { c: SiteConfig }) {
   const p = c.partner;
   const href = `${p.url}${p.url.includes("?") ? "&" : "?"}utm_source=${c.id}-site&utm_medium=cross-banner&utm_campaign=partner`;
+  if (!p.colors) return null;
   const vars = {
     "--color-brand": p.colors.accent,
     "--color-brand-deep": p.colors.accent,
@@ -26,6 +27,7 @@ export function PartnerPromo({ c }: { c: SiteConfig }) {
           target="_blank"
           rel="noopener"
           style={vars}
+          data-reveal="zoom"
           className="group relative grid items-center gap-6 overflow-hidden p-6 sm:p-10 lg:grid-cols-[1fr_1.15fr] lg:gap-10 lg:p-[clamp(2.5rem,3.1vw,60px)]"
         >
           <span className="absolute right-0 top-0 bg-black/15 px-3 py-1 font-display text-[11px] font-semibold uppercase tracking-widest">

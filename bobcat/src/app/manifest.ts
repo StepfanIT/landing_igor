@@ -4,5 +4,5 @@ import { site } from "@/site.config";
 export const dynamic = "force-static";
 
 export default function manifest() {
-  return buildManifest(site, { theme: "#f26a1b", background: "#0a0b0d" });
+  return buildManifest(site, { theme: "#e31b23", background: "#0a0b0d" });
 }

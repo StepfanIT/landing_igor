@@ -1,17 +1,19 @@
+/** Типи заявки у формі (оренди немає — компанія лише продає) */
 export const LEAD_TYPES = [
   { value: "sale", label: "Купівля" },
-  { value: "rent", label: "Оренда" },
   { value: "attachment", label: "Навісне" },
+  { value: "parts", label: "Запчастини" },
   { value: "service", label: "Сервіс" },
 ] as const;
 
-/** "consult" — коротка форма без вибору типу (блок "Замовити", "Замовити дзвінок") */
-export type LeadType = (typeof LEAD_TYPES)[number]["value"] | "consult";
+/** "consult" — коротка форма без вибору типу; "rent" — лишається для сумісності конфігів */
+export type LeadType = (typeof LEAD_TYPES)[number]["value"] | "consult" | "rent";
 
 export const LEAD_TYPE_LABELS: Record<LeadType, string> = {
   sale: "Купівля",
   rent: "Оренда",
   attachment: "Навісне",
+  parts: "Запчастини",
   service: "Сервіс",
   consult: "Консультація / зворотний дзвінок",
 };
