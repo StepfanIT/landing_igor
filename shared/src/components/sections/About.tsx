@@ -40,9 +40,17 @@ export function About({ c }: { c: SiteConfig }) {
         <div data-reveal="right" style={{ "--reveal-delay": "250ms" } as CSSProperties} className="flex flex-col justify-end lg:pb-[45px]">
           {a.logo && (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={a.logo} alt={`${c.company.name} — логотип`} width={2386} height={1646} loading="lazy" className="mb-8 h-auto w-[min(100%,340px)] lg:w-[min(100%,420px)]" />
+            // мобільний/планшет: по центру, зверху трохи заходить на фото, знизу плавно ховається під текст
+            <img
+              src={a.logo}
+              alt={`${c.company.name} — логотип`}
+              width={2386}
+              height={1646}
+              loading="lazy"
+              className="relative mx-auto -mb-[clamp(2rem,9vw,4.5rem)] -mt-[clamp(4.5rem,18vw,8rem)] h-auto w-[min(88%,440px)] [mask-image:linear-gradient(180deg,#000_58%,transparent_100%)] lg:mx-0 lg:mb-8 lg:mt-0 lg:w-[min(100%,420px)] lg:[mask-image:none]"
+            />
           )}
-          <div className="space-y-5 font-display text-[clamp(1rem,1.04vw,20px)] leading-relaxed text-white/70">
+          <div className="relative z-10 space-y-5 font-display text-[clamp(1rem,1.04vw,20px)] leading-relaxed text-white/70">
             {a.paragraphs.map((p) => (
               <p key={p}>{p}</p>
             ))}
