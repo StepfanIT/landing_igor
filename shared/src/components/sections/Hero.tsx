@@ -4,7 +4,7 @@ import { withBase } from "../../base-path";
 import type { SiteConfig } from "../../types";
 import { MachineArt } from "../MachineArt";
 import { CountUp } from "../Motion";
-import { Bullet, telHref } from "../ui";
+import { Bullet, cx, telHref } from "../ui";
 
 const STAT_ICONS = {
   machines: withBase("/images/icons/stat-machines.png"),
@@ -13,10 +13,24 @@ const STAT_ICONS = {
 
 function Backdrop({ c, priority }: { c: SiteConfig; priority?: boolean }) {
   const h = c.hero;
+  const side = h.fit === "side";
   return (
     <>
+      {h.image && side && (
+        // м'яке світіння в кольорі бренду за технікою (десктоп)
+        <div className="absolute inset-0 hidden bg-[radial-gradient(ellipse_55%_70%_at_72%_55%,color-mix(in_srgb,var(--color-brand)_22%,transparent),transparent_70%)] lg:block" />
+      )}
       {h.image ? (
-        <Image src={h.image} alt="" fill priority={priority} sizes="100vw" className="object-cover object-[60%_center]" />
+        <div className={cx("absolute inset-0", side && "lg:left-auto lg:w-[62%] lg:[mask-image:linear-gradient(90deg,transparent_0%,#000_38%)]")}>
+          <Image
+            src={h.image}
+            alt=""
+            fill
+            priority={priority}
+            sizes={side ? "(min-width: 1024px) 62vw, 100vw" : "100vw"}
+            className={cx("object-cover", side ? "object-[60%_center] lg:object-[50%_60%]" : "object-[60%_center]")}
+          />
+        </div>
       ) : (
         <MachineArt kind={h.art} className="absolute bottom-0 right-0 h-[80%] w-auto opacity-60" />
       )}

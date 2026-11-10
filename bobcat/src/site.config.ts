@@ -68,6 +68,7 @@ export const site: SiteConfig = {
   sections: { rental: false, faq: false },
   hero: {
     image: "/images/hero.webp",
+    fit: "side",
     art: "skid-steer",
     stats: [
       { icon: "machines", value: "35+", label: "одиниць техніки в наявності" },
