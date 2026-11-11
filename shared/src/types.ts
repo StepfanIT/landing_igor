@@ -197,7 +197,9 @@ export interface SiteConfig {
     text: string;
     models: string[];
     cta: string;
+    /** Лінійка техніки партнера (PNG/WebP без фону) — на всю ширину екрана під кнопкою */
     image?: string;
+    imageSize?: { width: number; height: number };
     art: MachineKind;
     colors?: { bg: string; fg: string; accent: string; accentFg: string };
     /** Колір кнопки "Переглянути весь асортимент" — бренд сайту-партнера, щоб кнопка виділялась */

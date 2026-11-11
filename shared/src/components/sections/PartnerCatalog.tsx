@@ -70,27 +70,22 @@ export function PartnerCatalog({ c }: { c: SiteConfig }) {
               </span>
             </a>
           </div>
-          {p.image && (
-            // мобільний: на всю ширину екрана і вище (обрізаємо краї), з sm — повне фото 3:1
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener"
-              data-reveal="zoom"
-              aria-label={p.cta}
-              className="group relative -mx-4 block aspect-[5/2] w-[calc(100%+2rem)] max-w-none overflow-hidden bg-white sm:mx-0 sm:aspect-[3/1] sm:w-full sm:max-w-5xl"
-            >
-              <Image
-                src={p.image}
-                alt={`Техніка ${p.name}`}
-                fill
-                sizes="(min-width: 1024px) 64rem, 100vw"
-                className="object-cover transition duration-500 group-hover:scale-[1.03]"
-              />
-            </a>
-          )}
         </div>
       </div>
+
+      {/* лінійка техніки партнера: без фону, на всю ширину екрана */}
+      {p.image && (
+        <a href={href} target="_blank" rel="noopener" data-reveal="zoom" aria-label={p.cta} className="group mt-8 block w-full overflow-hidden lg:mt-12">
+          <Image
+            src={p.image}
+            alt={`Техніка ${p.name}`}
+            width={p.imageSize?.width ?? 3200}
+            height={p.imageSize?.height ?? 1000}
+            sizes="100vw"
+            className="h-auto w-full transition duration-500 group-hover:scale-[1.02]"
+          />
+        </a>
+      )}
     </section>
   );
 }
