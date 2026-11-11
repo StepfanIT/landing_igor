@@ -4,30 +4,6 @@ import type { Product } from "@landing/ui";
 
 export const products: Product[] = [
   {
-    "id": "3095744928",
-    "name": "Bobcat S76 (S770) High Flow",
-    "kind": "skid-steer",
-    "image": "/images/products/bobcat-s76-s770-high-flow-3095744928.webp",
-    "deals": [
-      "sale"
-    ],
-    "badge": "2024",
-    "price": 89900,
-    "currency": "EUR",
-    "priceSale": "89 900 €",
-    "specs": [
-      {
-        "label": "Вага",
-        "value": "4 т"
-      },
-      {
-        "label": "Потужність",
-        "value": "55 к.с."
-      }
-    ],
-    "sourceUrl": "https://050-999-59-39.online/p3095744928-mini-pogruzchik-bobcat.html"
-  },
-  {
     "id": "3109598533",
     "name": "Bobcat T770 High Flow",
     "kind": "track-loader",
