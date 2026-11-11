@@ -148,7 +148,7 @@ export const site: SiteConfig = {
     text: "Телескопічні навантажувачі JCB — Agri, Agri Plus, Hi Viz. Фото, ціни та характеристики на нашому сайті JCB.",
     models: [],
     cta: "Переглянути весь асортимент JCB",
-    image: "/images/partner-jcb.webp",
+    image: "/images/partner-jcb-3dx.webp",
     art: "telehandler",
     products: jcbProducts,
     ctaColor: { bg: "#ffc72c", fg: "#131313" },

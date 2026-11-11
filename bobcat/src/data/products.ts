@@ -28,54 +28,6 @@ export const products: Product[] = [
     "sourceUrl": "https://050-999-59-39.online/p3095744928-mini-pogruzchik-bobcat.html"
   },
   {
-    "id": "3095744930",
-    "name": "Bobcat T650 High Flow",
-    "kind": "track-loader",
-    "image": "/images/products/bobcat-t650-high-flow-3095744930.webp",
-    "deals": [
-      "sale"
-    ],
-    "badge": "2018",
-    "price": 52000,
-    "currency": "EUR",
-    "priceSale": "52 000 €",
-    "specs": [
-      {
-        "label": "Напрацювання",
-        "value": "2 500 мотогод"
-      },
-      {
-        "label": "Вага",
-        "value": "4,2 т"
-      }
-    ],
-    "sourceUrl": "https://050-999-59-39.online/p3095744930-gusenichnyj-mini-pogruzchik.html"
-  },
-  {
-    "id": "3113462937",
-    "name": "Bobcat S650 High Flow",
-    "kind": "skid-steer",
-    "image": "/images/products/bobcat-s650-high-flow-3113462937.webp",
-    "deals": [
-      "sale"
-    ],
-    "badge": "2017",
-    "price": 55000,
-    "currency": "EUR",
-    "priceSale": "55 000 €",
-    "specs": [
-      {
-        "label": "Напрацювання",
-        "value": "820 мотогод"
-      },
-      {
-        "label": "Вага",
-        "value": "3,8 т"
-      }
-    ],
-    "sourceUrl": "https://050-999-59-39.online/p3113462937-frontalnyj-pogruzchik-bobcat.html"
-  },
-  {
     "id": "3109598533",
     "name": "Bobcat T770 High Flow",
     "kind": "track-loader",

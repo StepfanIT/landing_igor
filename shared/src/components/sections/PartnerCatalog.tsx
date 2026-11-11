@@ -22,6 +22,8 @@ export function PartnerCatalog({ c }: { c: SiteConfig }) {
     <section id="partner" aria-labelledby="partner-title" className="bg-page pb-16 pt-12 lg:pb-[100px] lg:pt-[62px]">
       <div className="container-site">
         {items.length > 0 && (
+          // ціни, стрілки та підсвітка карток — у кольорі бренду-партнера, як кнопка нижче
+          <div style={{ "--color-brand": cta.bg } as CSSProperties}>
           <CardSlider titleId="partner-title" title={`Техніка ${p.name}`}>
             {items.map((x) => {
               const price = x.priceSale ?? DEFAULT_PRICE;
@@ -48,6 +50,7 @@ export function PartnerCatalog({ c }: { c: SiteConfig }) {
               );
             })}
           </CardSlider>
+          </div>
         )}
 
         <div className="mt-10 flex flex-col items-center gap-8 lg:mt-[60px]">
@@ -67,8 +70,22 @@ export function PartnerCatalog({ c }: { c: SiteConfig }) {
             </a>
           </div>
           {p.image && (
-            <a href={href} target="_blank" rel="noopener" data-reveal="zoom" className="block w-full max-w-5xl transition hover:scale-[1.02]" aria-label={p.cta}>
-              <Image src={p.image} alt={`Лінійка техніки ${p.name}`} width={2000} height={620} sizes="(min-width: 1024px) 64rem, 100vw" className="h-auto w-full object-contain" />
+            // мобільний: на всю ширину екрана і вище (обрізаємо краї), з sm — повне фото 3:1
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener"
+              data-reveal="zoom"
+              aria-label={p.cta}
+              className="group relative -mx-4 block aspect-[5/2] w-[calc(100%+2rem)] max-w-none overflow-hidden bg-white sm:mx-0 sm:aspect-[3/1] sm:w-full sm:max-w-5xl"
+            >
+              <Image
+                src={p.image}
+                alt={`Техніка ${p.name}`}
+                fill
+                sizes="(min-width: 1024px) 64rem, 100vw"
+                className="object-cover transition duration-500 group-hover:scale-[1.03]"
+              />
             </a>
           )}
         </div>

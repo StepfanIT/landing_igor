@@ -36,7 +36,12 @@ FEEDS = {
 BRAND_FILTER = {"jcb": "JCB", "bobcat": "Bobcat"}
 # оголошення з брудними/погано вирізаними фото (вода, водяні знаки, артефакти фону) — не показуємо
 EXCLUDE = {
-    "bobcat": {"3113462929"},
+    "bobcat": {
+        "3113462929",
+        # відео Ігоря 2026-11-11: T650 2018, S650 2017 — погано вирізані;
+        # бетономішалка, щітка, 2 снігоочисники SB240 і мульчер Prinoth — навісного не видно / брудно
+        "3095744930", "3113462937", "3095744918", "3095744919", "3113462931", "3113462934", "3113462936",
+    },
     "jcb": {"3109598549", "3109598535", "3109598547", "3095744914", "3109598539", "3095744911"},
 }
 MAX_SANE_PRICE = 500_000  # ціни вище — явна помилка у фіді → "Ціна за запитом"
@@ -207,6 +212,9 @@ def main() -> None:
         for o in root.iter("offer"):
             name = o.findtext("name_ua") or o.findtext("name") or ""
             vendor = o.findtext("vendor") or ""
+            if o.get("id") in EXCLUDE.get(site, set()):
+                print(f"[{site}] пропускаю (погане фото): {name}")
+                continue
             if o.findtext("categoryId") not in MACHINE_CATEGORIES:
                 # навісне обладнання
                 att_dir.mkdir(parents=True, exist_ok=True)

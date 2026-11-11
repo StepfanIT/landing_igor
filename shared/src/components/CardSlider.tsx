@@ -1,6 +1,6 @@
 "use client";
 
-import { Children, useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { Children, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowLeftThin, ArrowRightThin } from "./FigmaIcons";
 import { GiantTitle, cx } from "./ui";
 
@@ -74,18 +74,13 @@ export function CardSlider({
         aria-label={title}
         tabIndex={0}
         className={cx(
-          "scrollbar-none -mx-4 mt-6 grid snap-x snap-mandatory auto-cols-[86%] grid-flow-col gap-x-4 gap-y-[clamp(1rem,2.6vw,50px)] overflow-x-auto scroll-px-4 px-4 sm:mx-0 sm:auto-cols-[calc((100%-1.25rem)/2)] sm:gap-x-5 sm:scroll-px-0 sm:px-0 lg:mt-[clamp(1.5rem,2.1vw,41px)] lg:auto-cols-[calc((100%-2*clamp(1.25rem,2.1vw,40px))/3)] lg:gap-x-[clamp(1.25rem,2.1vw,40px)]",
+          "scrollbar-none -mx-4 mt-6 grid snap-x snap-mandatory overscroll-x-contain auto-cols-[86%] grid-flow-col gap-x-4 gap-y-[clamp(1rem,2.6vw,50px)] overflow-x-auto scroll-px-4 px-4 sm:mx-0 sm:auto-cols-[calc((100%-1.25rem)/2)] sm:gap-x-5 sm:scroll-px-0 sm:px-0 lg:mt-[clamp(1.5rem,2.1vw,41px)] lg:auto-cols-[calc((100%-2*clamp(1.25rem,2.1vw,40px))/3)] lg:gap-x-[clamp(1.25rem,2.1vw,40px)]",
           rows === 2 && count > 3 && "lg:grid-rows-2",
         )}
       >
-        {Children.map(children, (child, i) => (
-          <div
-            className="snap-start"
-            data-reveal
-            style={{ "--reveal-delay": `${Math.min(i, 5) * 80}ms` } as CSSProperties}
-          >
-            {child}
-          </div>
+        {/* картки статичні (без анімації появи): у горизонтальному слайдері вона давала «люфт» при прокрутці */}
+        {Children.map(children, (child) => (
+          <div className="snap-start">{child}</div>
         ))}
       </div>
     </div>

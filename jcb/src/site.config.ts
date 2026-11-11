@@ -148,7 +148,7 @@ export const site: SiteConfig = {
     text: "Колісні та гусеничні міні-навантажувачі Bobcat — фото, ціни та характеристики на нашому сайті Bobcat.",
     models: [],
     cta: "Переглянути весь асортимент Bobcat",
-    image: "/images/partner-lineup.webp",
+    image: "/images/partner-bobcat-lineup.webp",
     art: "skid-steer",
     products: bobcatProducts,
     ctaColor: { bg: "#e31b23", fg: "#ffffff" },
