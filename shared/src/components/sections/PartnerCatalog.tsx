@@ -20,7 +20,7 @@ export function PartnerCatalog({ c }: { c: SiteConfig }) {
   const cta = p.ctaColor ?? { bg: "var(--color-brand)", fg: "var(--color-on-brand)" };
 
   return (
-    <section id="partner" aria-labelledby="partner-title" className="bg-page pb-16 pt-12 lg:pb-[100px] lg:pt-[62px]">
+    <section id="partner" aria-labelledby="partner-title" className="bg-page pb-8 pt-12 sm:pb-12 lg:pb-[80px] lg:pt-[62px]">
       <div className="container-site">
         {items.length > 0 && (
           // ціни, стрілки та підсвітка карток — у кольорі бренду-партнера, як кнопка нижче
@@ -73,32 +73,28 @@ export function PartnerCatalog({ c }: { c: SiteConfig }) {
         </div>
       </div>
 
-      {/* лінійка техніки партнера: без фону, на всю ширину екрана, світиться по контуру кольором кнопки */}
+      {/* лінійка техніки партнера: без фону, на всю ширину екрана. Сяйво кольору кнопки «запечене»
+          в саму картинку (без CSS-фільтрів і анімацій — швидко малюється на телефоні).
+          На мобільному трохи більша за екран (краї обрізаються), щоб техніку було добре видно. */}
       {p.image && (
         <a
           href={href}
           target="_blank"
           rel="noopener"
-          data-reveal="zoom"
           aria-label={p.cta}
-          className="group relative mt-4 block w-full overflow-x-clip py-6 sm:py-10 lg:mt-6"
-          style={
-            {
-              "--glow-a": `color-mix(in srgb, ${cta.bg} 70%, transparent)`,
-              "--glow-b": `color-mix(in srgb, ${cta.bg} 35%, transparent)`,
-              "--glow-bg": `color-mix(in srgb, ${cta.bg} 16%, transparent)`,
-            } as CSSProperties
-          }
+          className="relative -mt-4 block w-full overflow-x-clip sm:-mt-8 lg:-mt-10"
+          style={{ "--glow-bg": `color-mix(in srgb, ${cta.bg} 14%, transparent)` } as CSSProperties}
         >
-          {/* м'яке сяйво на фоні за технікою */}
-          <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_48%_42%_at_50%_58%,var(--glow-bg),transparent_72%)]" />
+          <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_48%_40%_at_50%_55%,var(--glow-bg),transparent_72%)]" />
           <Image
             src={p.image}
             alt={`Техніка ${p.name}`}
             width={p.imageSize?.width ?? 3200}
             height={p.imageSize?.height ?? 1000}
-            sizes="100vw"
-            className="relative h-auto w-full transition duration-500 [filter:drop-shadow(0_0_6px_var(--glow-a))_drop-shadow(0_0_18px_var(--glow-b))] group-hover:scale-[1.02] sm:[filter:drop-shadow(0_0_10px_var(--glow-a))_drop-shadow(0_0_30px_var(--glow-b))] lg:[filter:drop-shadow(0_0_14px_var(--glow-a))_drop-shadow(0_0_44px_var(--glow-b))]"
+            sizes="(max-width: 639px) 140vw, 100vw"
+            loading="eager"
+            fetchPriority="low"
+            className="relative -ml-[20%] h-auto w-[140%] max-w-none sm:ml-0 sm:w-full"
           />
         </a>
       )}
