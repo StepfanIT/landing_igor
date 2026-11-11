@@ -14,3 +14,5 @@ _site
 .venv-feed
 __pycache__
 vdeo_igor
+# копії фото сайту-партнера (scripts/sync-partner-images.mjs)
+*/public/images/partner/

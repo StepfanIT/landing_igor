@@ -50,7 +50,7 @@ jobs:
           NEXT_PUBLIC_BASE_PATH="/$REPO_NAME/bobcat" \
           NEXT_PUBLIC_SITE_URL="$PAGES_URL/bobcat" \
           NEXT_PUBLIC_PARTNER_URL="$PAGES_URL/jcb/" \
-          npx next build
+          npm run build
 
       - name: Build JCB
         working-directory: jcb
@@ -58,7 +58,7 @@ jobs:
           NEXT_PUBLIC_BASE_PATH="/$REPO_NAME/jcb" \
           NEXT_PUBLIC_SITE_URL="$PAGES_URL/jcb" \
           NEXT_PUBLIC_PARTNER_URL="$PAGES_URL/bobcat/" \
-          npx next build
+          npm run build
 
       - name: Assemble site
         run: |

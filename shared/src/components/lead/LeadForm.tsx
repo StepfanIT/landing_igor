@@ -5,6 +5,7 @@ import { CheckCircle2, Loader2, Phone } from "lucide-react";
 import { withBase } from "../../base-path";
 import { LEAD_TYPES, type LeadPrefill, type LeadType } from "../../lead-types";
 import { Telegram } from "../FigmaIcons";
+import { Select } from "../Select";
 import { buttonClass, cx, telHref } from "../ui";
 import { useLead } from "./LeadContext";
 
@@ -28,15 +29,6 @@ export function formatPhone(input: string) {
 /* поле як у макеті: прозоре, лише нижня лінія */
 const field =
   "w-full border-0 border-b border-white/15 bg-transparent px-0 py-5 text-base text-white placeholder:text-white/60 outline-none transition focus:border-brand";
-const selectCls = cx(field, "appearance-none pr-8 [&_option]:bg-page [&_option]:text-white");
-const chevron = {
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "right 0 center",
-  backgroundSize: "16px",
-  backgroundImage:
-    "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff99' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")",
-};
-
 /** Скільки моделей показувати у списку (решта — через "Інша модель") */
 const MAX_MODELS = 10;
 const OTHER_MODEL = "Інша модель";
@@ -226,19 +218,19 @@ export function LeadForm({
 
       {full && (type === "sale" || type === "attachment") && (
         <>
-          <label htmlFor={`${uid}-model`} className="sr-only">
-            Модель
-          </label>
-          <select id={`${uid}-model`} name="model" value={model} onChange={(e) => setModel(e.target.value)} className={selectCls} style={chevron}>
-            <option value="">{type === "attachment" ? "Обладнання — оберіть зі списку" : "Модель — оберіть зі списку"}</option>
-            {model && model !== OTHER_MODEL && !modelOptions.includes(model) && <option value={model}>{model}</option>}
-            {modelOptions.map((m) => (
-              <option key={m} value={m}>
-                {m}
-              </option>
-            ))}
-            <option value={OTHER_MODEL}>{OTHER_MODEL}</option>
-          </select>
+          <Select
+            id={`${uid}-model`}
+            name="model"
+            label={type === "attachment" ? "Обладнання" : "Модель"}
+            value={model}
+            onChange={setModel}
+            placeholder={type === "attachment" ? "Обладнання — оберіть зі списку" : "Модель — оберіть зі списку"}
+            options={[
+              ...(model && model !== OTHER_MODEL && !modelOptions.includes(model) ? [model] : []),
+              ...modelOptions,
+              OTHER_MODEL,
+            ]}
+          />
         </>
       )}
       {full && (

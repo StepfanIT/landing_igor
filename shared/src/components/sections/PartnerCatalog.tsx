@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
+import { withBase } from "../../base-path";
 import { DEFAULT_PRICE, KIND_LABELS } from "../../labels";
 import type { SiteConfig } from "../../types";
 import { CardSlider } from "../CardSlider";
@@ -9,7 +10,7 @@ import { MediaCard } from "../ProductCard";
 /**
  * "ТЕХНІКА BOBCAT" на сайті JCB (і навпаки): слайдер техніки з сайту-партнера,
  * кнопка "Переглянути весь асортимент" і фото лінійки. У кольорах поточного сайту.
- * Фото карток беруться прямо з сайту-партнера (його public/images).
+ * Фото карток — локальні копії фото партнера (scripts/sync-partner-images.mjs → public/images/partner).
  */
 export function PartnerCatalog({ c }: { c: SiteConfig }) {
   const p = c.partner;
@@ -34,7 +35,7 @@ export function PartnerCatalog({ c }: { c: SiteConfig }) {
                     x.image ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
-                        src={`${base}${x.image}`}
+                        src={withBase(x.image.replace("/images/products/", "/images/partner/"))}
                         alt={`${x.name} — ${KIND_LABELS[x.kind].toLowerCase()}`}
                         loading="lazy"
                         className="absolute inset-0 h-full w-full object-contain"

@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node ../scripts/sync-partner-images.mjs jcb",
     "dev": "next dev -p 3002",
+    "prebuild": "node ../scripts/sync-partner-images.mjs jcb",
     "build": "next build",
     "start": "next start -p 3002",
     "typecheck": "tsc --noEmit"
