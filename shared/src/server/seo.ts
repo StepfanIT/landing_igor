@@ -82,7 +82,7 @@ export function buildJsonLd(c: SiteConfig) {
     telephone: c.company.phone,
     email: c.company.email,
     image: `${url}/og.png`,
-    logo: `${url}/icon.svg`,
+    logo: `${url}/logo.png`, // Google вимагає растровий логотип (PNG ≥ 112px)
     foundingDate: String(c.company.foundingYear),
     priceRange: "$$$",
     address: {
@@ -140,7 +140,6 @@ export function buildRobots(c: SiteConfig): MetadataRoute.Robots {
   return {
     rules: [{ userAgent: "*", allow: "/", disallow: ["/api/"] }],
     sitemap: `${url}/sitemap.xml`,
-    host: url,
   };
 }
 
@@ -154,6 +153,10 @@ export function buildManifest(c: SiteConfig, colors: { theme: string; background
     lang: "uk",
     theme_color: colors.theme,
     background_color: colors.background,
-    icons: [{ src: `${BASE_PATH}/icon.svg`, sizes: "any", type: "image/svg+xml" }],
+    icons: [
+      { src: `${BASE_PATH}/icon.svg`, sizes: "any", type: "image/svg+xml" },
+      { src: `${BASE_PATH}/icon-192.png`, sizes: "192x192", type: "image/png" },
+      { src: `${BASE_PATH}/logo.png`, sizes: "512x512", type: "image/png", purpose: "any" },
+    ],
   };
 }
