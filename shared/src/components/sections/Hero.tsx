@@ -117,13 +117,14 @@ export function Hero({ c }: { c: SiteConfig }) {
   );
 }
 
-/** Смужка переваг під першим екраном (з великими напівпрозорими 01/02/03) */
+/** Смужка переваг під першим екраном (з великими напівпрозорими 01/02/03).
+ *  overflow-x-clip: цифри не обрізаються по висоті, але й не дають горизонтальної прокрутки. */
 export function Benefits({ c }: { c: SiteConfig }) {
   return (
-    <section aria-label="Наші переваги" className="bg-page pt-6 lg:pt-[50px]">
+    <section aria-label="Наші переваги" className="bg-page pt-6 pb-[clamp(0.5rem,2.6vw,50px)] lg:pt-[50px]">
       <ul className="container-site grid gap-2 sm:grid-cols-3 lg:!px-[20px]">
         {c.hero.benefits.map((b, i) => (
-          <li key={b.text} data-reveal style={{ "--reveal-delay": `${i * 120}ms` } as CSSProperties} className="relative flex min-h-[clamp(4rem,5.7vw,109px)] items-center gap-[clamp(0.75rem,1vw,20px)] overflow-hidden py-2 lg:pl-[6px]">
+          <li key={b.text} data-reveal style={{ "--reveal-delay": `${i * 120}ms` } as CSSProperties} className="relative flex min-h-[clamp(4rem,5.7vw,109px)] items-center gap-[clamp(0.75rem,1vw,20px)] overflow-x-clip py-2 lg:pl-[6px]">
             <span
               aria-hidden="true"
               className="pointer-events-none absolute right-0 top-1/2 sm:right-auto sm:left-[60%] -translate-y-[45%] select-none font-display text-[clamp(4rem,9.6vw,185px)] font-semibold leading-none text-white/[0.09]"
