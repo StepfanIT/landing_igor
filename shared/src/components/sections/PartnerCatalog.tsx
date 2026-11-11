@@ -75,7 +75,7 @@ export function PartnerCatalog({ c }: { c: SiteConfig }) {
 
       {/* лінійка техніки партнера: без фону, на всю ширину екрана. Сяйво кольору кнопки «запечене»
           в саму картинку (без CSS-фільтрів і анімацій — швидко малюється на телефоні).
-          На мобільному трохи більша за екран (краї обрізаються), щоб техніку було добре видно. */}
+          На всіх екранах лінійка влазить повністю. */}
       {p.image && (
         <a
           href={href}
@@ -91,10 +91,10 @@ export function PartnerCatalog({ c }: { c: SiteConfig }) {
             alt={`Техніка ${p.name}`}
             width={p.imageSize?.width ?? 3200}
             height={p.imageSize?.height ?? 1000}
-            sizes="(max-width: 639px) 140vw, 100vw"
+            sizes="100vw"
             loading="eager"
             fetchPriority="low"
-            className="relative -ml-[20%] h-auto w-[140%] max-w-none sm:ml-0 sm:w-full"
+            className="relative h-auto w-full"
           />
         </a>
       )}
