@@ -20,7 +20,7 @@ export function PartnerCatalog({ c }: { c: SiteConfig }) {
   const cta = p.ctaColor ?? { bg: "var(--color-brand)", fg: "var(--color-on-brand)" };
 
   return (
-    <section id="partner" aria-labelledby="partner-title" className="bg-page pb-8 pt-12 sm:pb-12 lg:pb-[80px] lg:pt-[62px]">
+    <section id="partner" aria-labelledby="partner-title" className={`bg-page pt-12 lg:pt-[62px] ${p.image ? "pb-2 sm:pb-4" : "pb-8 sm:pb-12 lg:pb-[80px]"}`}>
       <div className="container-site">
         {items.length > 0 && (
           // ціни, стрілки та підсвітка карток — у кольорі бренду-партнера, як кнопка нижче
@@ -73,8 +73,9 @@ export function PartnerCatalog({ c }: { c: SiteConfig }) {
         </div>
       </div>
 
-      {/* лінійка техніки партнера: без фону, на всю ширину екрана. Сяйво кольору кнопки «запечене»
-          в саму картинку (без CSS-фільтрів і анімацій — швидко малюється на телефоні).
+      {/* лінійка техніки партнера: без фону, на всю ширину екрана. Широке сяйво кольору кнопки «запечене»
+          в саму картинку разом із прозорими полями (scratchpad bake_glow) — без CSS-фільтрів і анімацій,
+          однаково масштабується на всіх екранах.
           На всіх екранах лінійка влазить повністю. */}
       {p.image && (
         <a
@@ -82,7 +83,7 @@ export function PartnerCatalog({ c }: { c: SiteConfig }) {
           target="_blank"
           rel="noopener"
           aria-label={p.cta}
-          className="relative -mt-4 block w-full overflow-x-clip sm:-mt-8 lg:-mt-10"
+          className="relative -mt-6 block w-full overflow-x-clip sm:-mt-12 lg:-mt-20"
           style={{ "--glow-bg": `color-mix(in srgb, ${cta.bg} 14%, transparent)` } as CSSProperties}
         >
           <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_48%_40%_at_50%_55%,var(--glow-bg),transparent_72%)]" />
