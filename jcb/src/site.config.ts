@@ -38,6 +38,7 @@ export const site: SiteConfig = {
   },
   seo: {
     siteUrl: SITE_URL,
+    googleVerification: "hlHC7h7KcJtQ4T3bp1lC4cKL-NzrM_mLU0F3wnbrNbc",
     title: "Телескопічні навантажувачі JCB — продаж у Луцьку | ТехноКет",
     description:
       "Телескопічні навантажувачі JCB в наявності: 525-60, 531-70, 535-95, 540-140 Hi Viz, 550-80 Agri. Ціни, фото, перевірений стан. Луцьк, вул. Рівненська, 146 — доставка по Україні.",
