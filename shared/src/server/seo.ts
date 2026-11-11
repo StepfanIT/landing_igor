@@ -38,6 +38,7 @@ export function buildMetadata(c: SiteConfig): Metadata {
       googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
     },
     category: "business",
+    ...(c.seo.googleVerification ? { verification: { google: c.seo.googleVerification } } : {}),
   };
 }
 

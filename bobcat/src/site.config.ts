@@ -40,6 +40,7 @@ export const site: SiteConfig = {
   },
   seo: {
     siteUrl: SITE_URL,
+    googleVerification: "oKUe55YnYhUnFyNuW2xASZTzrcKwE-lqIH17pC5f-j8",
     title: "Міні-навантажувачі Bobcat — продаж у Луцьку | ТехноКет",
     description:
       "Міні-навантажувачі Bobcat в наявності: S770 (S76), S650, S300, S250, T770 High Flow. Ціни, фото, перевірений стан. Луцьк, вул. Рівненська, 146 — доставка по Україні.",

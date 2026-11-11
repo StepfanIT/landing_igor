@@ -107,6 +107,8 @@ export interface SiteConfig {
     keywords: string[];
     ogTitle: string;
     ogSubtitle: string;
+    /** код підтвердження Google Search Console (meta google-site-verification) */
+    googleVerification?: string;
   };
   nav: NavItem[];
   /** Додаткові блоки, яких немає в макеті (вимкнені за замовчуванням) */
